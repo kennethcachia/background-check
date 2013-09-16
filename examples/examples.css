@@ -1,0 +1,420 @@
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #111;
+}
+
+h1,
+h2,
+h3,
+.header-drag {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0 0 .6em 0;
+}
+
+h1:last-child,
+h2:last-child,
+h3:last-child,
+p:last-child {
+  margin-bottom: 0;
+}
+
+.container {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container--narrow {
+  max-width: 500px;
+}
+
+.snippet {
+  display: inline-block;
+  padding: 0 8px;
+  font-size: .9em;
+  background: #eee;
+}
+
+a {
+  color: #107FC9;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.button {
+  display: inline-block;
+  margin: 0;
+  padding: 9px 12px;
+  border-radius: 3px;
+  background: #107FC9;
+  color: #fff;
+  font-family: monaco, monospace;
+  font-size:10px;
+  line-height: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+}
+
+.button--secondary {
+  background: #999;
+}
+
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.header {
+  background: #f6f6f6;
+  padding: 100px 0 80px 0;
+  text-align: center;
+}
+
+.header-subtitle {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.header p {
+  max-width: 470px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-drag {
+  font-size: 15px;
+  border-left: 3px solid #ddd;
+  border-right: 3px solid #ddd;
+  padding: 10px;
+  display: inline-block;
+  margin-top: 50px;
+  background: #fff;
+
+  -webkit-shadow: 0 5px 8px rgba(0, 0, 0, 0.04);
+  -moz-box-shadow: 0 5px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+/* ==========================================================================
+   Examples
+   ========================================================================== */
+
+.examples {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.examples li {
+  display: inline-block;
+}
+
+.examples li:not(:last-child):after {
+  color: #999;
+  content: " -";
+}
+
+
+/* ==========================================================================
+   Main Demo
+   ========================================================================== */
+
+.demo {
+  position: relative;
+  padding: 110px 0 0 0;
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.demo-images {
+  overflow: hidden;
+  height: 400px;
+}
+
+.demo h2 {
+  position: absolute;
+  top: 40px;
+  left: 75px;
+  margin: 0;
+}
+
+.demo img {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 20px;
+  width: 300px;
+}
+
+
+/* ==========================================================================
+   Download
+   ========================================================================== */
+
+.download {
+  margin: 50px 0 50px 0;
+}
+
+.download .button {
+  margin: 0 3px;
+}
+
+
+/* ==========================================================================
+   Fixed Nav
+   ========================================================================== */
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.fixed-nav {
+  position: absolute;
+  left: 50%;
+  top: 47px;
+  width: 280px;
+  margin-left: -140px;
+  text-align: center;
+}
+
+.fixed-nav.background--dark .fixed-nav-line {
+  background: #fff;
+}
+
+.fixed-nav.background--dark .fixed-nav-logo {
+  color: #fff;
+}
+
+.fixed-nav-line,
+.fixed-nav-logo {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+
+.fixed-nav-line {
+  width: 40px;
+  height: 3px;
+  background: #222;
+}
+
+.fixed-nav-logo {
+  width: 170px;
+  height: 28px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   List
+   ========================================================================== */
+
+.list {
+  padding-top: 50px;
+}
+
+.list-item {
+  text-align: center;
+  margin: 70px 0;
+}
+
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.content {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.content-row {
+  margin-bottom: 60px;
+}
+
+.content-row:after {
+  display: table;
+  content: " ";
+  clear: both;
+}
+
+.content .button {
+  margin-top: 4px;
+}
+
+.content-code h3 {
+  margin-top: -29px;
+}
+
+.content-code pre {
+  font-family: monaco, monospace;
+  font-size: 13px;
+  background: #f5f5f5;
+  padding: 18px 20px;
+  border-radius: 2px;
+}
+
+.content-thirds {
+  margin-left: -3%
+}
+
+.content-third {
+  width: 30%;
+  margin-left: 3%;
+  float: left;
+}
+
+.content-third .content-code {
+  float: none;
+  width: auto;
+  margin-right: 0;
+}
+
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+  border-top: 1px solid #eee;
+  padding: 30px 0;
+}
+
+.footer-credits {
+  float: right;
+  margin-top: -1px;
+}
+
+
+/* ==========================================================================
+   Demo
+   ========================================================================== */
+
+.border {
+  position: absolute;
+  z-index: 999;
+  padding: 18px 20px;
+  border: 1px solid #E08E79;
+  cursor: move;
+  top: 25px;
+}
+
+.border--fixed {
+  position: fixed;
+}
+
+.border:hover {
+  border-color: #ADD8C7;
+}
+
+.border--one {
+  left: 30%;
+}
+
+.border--two {
+  left: 40%;
+  top: 28px;
+}
+
+.border--three {
+  left: 49%;
+  top: 32px;
+}
+
+.border--text {
+  left: 60%;
+  top: 26px;
+}
+
+.icon {
+  background: #107FC9;
+  border-radius: 999px;
+}
+
+.border--one .icon {
+  width: 26px;
+  height: 26px;
+}
+
+.border--two .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.border--three .icon {
+  width: 10px;
+  height: 10px;
+}
+
+.label {
+  font-weight: bold;
+  color: #107FC9;
+  margin: 0;
+}
+
+.icon.background--light {
+  background: #222;
+}
+
+.icon.background--dark {
+  background: #fff;
+}
+
+.label.background--light {
+  color: #222;
+}
+
+.label.background--dark {
+  color: #fff;
+}
