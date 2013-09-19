@@ -71,7 +71,7 @@ BackgroundCheck.set('targets', '.header');
 BackgroundCheck.destroy();
 ```
 
-#Attributes
+##Attributes
 
 Used with `.init()`, `.set()` or `.get()`
 
