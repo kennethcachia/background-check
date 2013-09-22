@@ -88,4 +88,4 @@ Used with `.init()`, `.set()` or `.get()`
 
 ##Browser Support
 
-Tested on IE 9+, iOS 6 and the latest versions of Chrome, Firefox and Safari.
+Tested on IE 9-11, iOS 6/7 and the latest versions of Chrome, Firefox and Safari.
