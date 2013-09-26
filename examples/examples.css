@@ -372,6 +372,11 @@ a:hover {
   top: 32px;
 }
 
+.border--four {
+  left: 59%;
+  top: 32px;
+}
+
 .border--text {
   left: 60%;
   top: 26px;
@@ -380,6 +385,10 @@ a:hover {
 .icon {
   background: #107FC9;
   border-radius: 999px;
+}
+
+.icon--simple {
+  border-radius: 0;
 }
 
 .border--one .icon {
@@ -397,10 +406,9 @@ a:hover {
   height: 10px;
 }
 
-.label {
-  font-weight: bold;
-  color: #107FC9;
-  margin: 0;
+.border--four .icon {
+  width: 60px;
+  height: 10px;
 }
 
 .icon.background--light {
@@ -411,10 +419,10 @@ a:hover {
   background: #fff;
 }
 
-.label.background--light {
-  color: #222;
+.icon.background--dark.background--complex {
+  background: #ccc;
 }
 
-.label.background--dark {
-  color: #fff;
+.icon.background--light.background--complex {
+  background: #aaa;
 }
