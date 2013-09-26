@@ -3,7 +3,7 @@
  * BackgroundCheck
  * http://kennethcachia.com/background-check
  *
- * v1.0.0
+ * v1.1.0
  */
 
 (function (root, factory) {
@@ -40,12 +40,17 @@
     attrs.images = getElements(a.images || 'img');
     attrs.changeParent = a.changeParent || false;
     attrs.threshold = a.threshold || 50;
+    attrs.minComplexity = a.minComplexity || 30;
     attrs.minOverlap = a.minOverlap || 50;
-    attrs.classes = a.classes || { dark: 'background--dark', light: 'background--light' };
     attrs.windowEvents = a.windowEvents || true;
     attrs.maxDuration = a.maxDuration || 500;
     attrs.mask = a.mask || { r: 0, g: 255, b: 0 };
     attrs.debug = a.debug || false;
+    attrs.classes = a.classes || {
+      dark: 'background--dark',
+      light: 'background--light',
+      complex: 'background--complex'
+    };
 
     if (supported === undefined) {
       checkSupport();
@@ -183,8 +188,9 @@
     for (var t = 0; t < targets.length; t++) {
       target = targets[t];
       target = get('changeParent') ? target.parentNode : target;
-      target.className = target.className.replace(' ' + get('classes').light, '');
-      target.className = target.className.replace(' ' + get('classes').dark, '');
+      target.classList.remove(get('classes').light);
+      target.classList.remove(get('classes').dark);
+      target.classList.remove(get('classes').complex);
     }
   }
 
@@ -195,8 +201,13 @@
    */
   function calculatePixelBrightness(target) {
     var dims = target.getBoundingClientRect(),
-        pixels,
-        lum = 0,
+        brightness,
+        data,
+        pixels = 0,
+        delta,
+        deltaSqr = 0,
+        mean = 0,
+        variance,
         minOverlap = 0,
         mask = get('mask');
 
@@ -204,23 +215,30 @@
       removeClasses(target);
 
       target = get('changeParent') ? target.parentNode : target;
-      pixels = context.getImageData(dims.left, dims.top, dims.width, dims.height).data;
+      data = context.getImageData(dims.left, dims.top, dims.width, dims.height).data;
 
-      for (var p = 0; p < pixels.length; p += 4) {
+      for (var p = 0; p < data.length; p += 4) {
 
-        if (pixels[p] === mask.r && pixels[p + 1] === mask.g && pixels[p + 2] === mask.b) {
+        if (data[p] === mask.r && data[p + 1] === mask.g && data[p + 2] === mask.b) {
           minOverlap++;
+        } else {
+          pixels++;
+          brightness = (0.2126 * data[p]) + (0.7152 * data[p + 1]) + (0.0722 * data[p + 2]);
+          delta = brightness - mean;
+          deltaSqr += delta * delta;
+          mean = mean + delta / pixels;
         }
-
-        lum += (0.2126 * pixels[p]) + (0.7152 * pixels[p + 1]) + (0.0722 * pixels[p + 2]);
       }
 
-      pixels = ((pixels.length / 4) + 1);
-      lum = lum / pixels / 255;
+      if (minOverlap <= (data.length / 4) * (1 - (get('minOverlap') / 100))) {
+        variance = Math.sqrt(deltaSqr / pixels) / 255;
+        mean = mean / 255;
+        log('Target: ' + target.className +  ' lum: ' + mean + ' var: ' + variance);
+        target.classList.add(mean <= (get('threshold') / 100) ? get('classes').dark : get('classes').light);
 
-      if (minOverlap <= pixels * (1 - (get('minOverlap') / 100))) {
-        log('Target: ' + target.className +  ' lum: ' + lum);
-        target.className += ' ' + (lum <= (get('threshold') / 100) ? get('classes').dark : get('classes').light);
+        if (variance > get('minComplexity') / 100) {
+          target.classList.add(get('classes').complex);
+        }
       }
     }
   }

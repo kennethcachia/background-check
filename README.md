@@ -28,6 +28,38 @@ p.background--light {
 
 Classes are only added if the element overlaps an image. An element is considered to overlap an image if at least 50% (configurable) of it's area is covering that image.
 
+###Complex backgrounds
+
+The light and dark classes work well with simple backgrounds, but you might require an additional level of control for elaborate backgrounds. BackgroundCheck adds `.background--complex` to an element if its background exceeds a certain level of complexity.
+
+This class can be used as an intermediate state:
+
+```css
+p.background--light {
+  color: black;
+}
+
+p.background--dark {
+  color: white;
+}
+
+p.background--complex {
+  color: gray;
+}
+```
+
+or:
+
+```css
+p.background--dark.background--complex {
+  color: #ccc;
+}
+
+p.background--light.background--complex {
+  color: #aaa;
+}
+```
+
 ##How to use
 
 **Initialize**
@@ -79,8 +111,9 @@ Used with `.init()`, `.set()` or `.get()`
 + **images**: Images to be used. *Type:* String, Element or NodeList. *Default:* All images on page.
 + **changeParent**: Determines if classes are added to a target or to its parent. *Default:* false.
 + **threshold**: Midpoint between dark and light. *Default:* 50 (%).
++ **minComplexity**: Minimum image complexity required before the *complex* class is added to a target. *Default:* 30 (%).
 + **minOverlap**: Minimum overlap required between an element and any of the images for that element to be processed. *Default:* 50 (%).
-+ **classes**: Classes added to targets. *Default:* `{ dark: 'background--dark', light: 'background--light' }`
++ **classes**: Classes added to targets. *Default:* `{ dark: 'background--dark', light: 'background--light', complex: 'background--complex' }`
 + **windowEvents**: Reprocess on window resize and scroll. *Default:* true.
 + **maxDuration**: Maximum processing time allowed. Killed if it takes longer. *Default:* 500 (ms).
 + **mask**: Used internally when checking if an element overlaps any of the images. *Default:* `{ r: 0, g: 255, b: 0 }`
