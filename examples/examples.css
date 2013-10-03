@@ -191,6 +191,15 @@ a:hover {
   width: 300px;
 }
 
+.demo--single img {
+  width: auto;
+}
+
+p.demo-credits {
+  max-width: none;
+  margin-top: 10px;
+}
+
 
 /* ==========================================================================
    Download
