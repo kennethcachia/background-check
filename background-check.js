@@ -140,7 +140,7 @@
    */
   function kill(start) {
     var duration = new Date().getTime() - start;
-    
+
     log('Duration: ' + duration + 'ms');
 
     if (duration > get('maxDuration')) {
@@ -172,7 +172,7 @@
    * Render image on canvas
    */
   function drawImage(image) {
-    var area = image.getBoundingClientRect();
+    var area = image.boundingClientRect || image.getBoundingClientRect();
     context.drawImage(image, area.left, area.top, area.width, area.height);
   }
 
@@ -196,7 +196,7 @@
 
 
   /*
-   * Calculate average pixel brightness of a region 
+   * Calculate average pixel brightness of a region
    * and add 'light' or 'dark' accordingly
    */
   function calculatePixelBrightness(target) {
@@ -315,7 +315,13 @@
         image = processImages[i];
 
         if (isInside(image, viewport)) {
-
+          // create a new image if image is actually a div with a background image
+          if (image.tagName == "DIV" && image.style.backgroundImage !== undefined){
+            var image2 = new Image();
+            image2.src = image.style.backgroundImage.replace(/url\(|\)/gi,'');
+            image2.boundingClientRect = image.getBoundingClientRect();
+            image = image2;
+          }
           if (image.naturalWidth === 0) {
             loading = true;
             log('Loading... ' + image.src);
