@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', function () {
     drag = getUIElement(e.target);
 
     if (drag) {
-      offset = { 
+      offset = {
         x: e.offsetX || e.layerX,
         y: e.offsetY || e.layerY
       };
@@ -64,6 +64,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
   // Prepare BackgroundCheck
   BackgroundCheck.init({
-    targets: '.target'
+    targets: '.target',
+    images: '.image',
+    debug: true
   });
 });
