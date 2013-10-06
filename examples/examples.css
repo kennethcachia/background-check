@@ -177,6 +177,33 @@ a:hover {
   height: 400px;
 }
 
+.demo-background-images{
+  overflow: hidden;
+  height: 400px;
+
+}
+
+.demo-background-images div{
+  display:inline-block;
+  background-size:300px 400px;
+  height:390px;
+  width:280px;
+  vertical-align: top;
+  margin: 0 20px;
+  font-size:40px;
+  line-height: 400px;
+  padding: 5px 10px;
+}
+
+.demo-background-images .background--white{
+  color:#333;
+}
+
+.demo-background-images .background--dark{
+  color:#f7f7f7;
+}
+
+
 .demo h2 {
   position: absolute;
   top: 40px;
