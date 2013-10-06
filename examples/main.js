@@ -65,7 +65,6 @@ window.addEventListener('DOMContentLoaded', function () {
   // Prepare BackgroundCheck
   BackgroundCheck.init({
     targets: '.target',
-    images: '.image',
-    debug: true
+    images: '.image'
   });
 });
