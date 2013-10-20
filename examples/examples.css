@@ -184,6 +184,10 @@ a:hover {
   margin-right: auto;
 }
 
+.demo-images--flexible {
+  height: auto;
+}
+
 .demo h2 {
   position: absolute;
   top: 40px;
@@ -226,6 +230,26 @@ a:hover {
 p.demo-credits {
   max-width: none;
   margin-top: 10px;
+}
+
+.demo-background p {
+  display: inline-block;
+  max-width: none;
+  margin: 30px 0 0 0;
+  font-family: monaco, monospace;
+  font-size: 13px;
+  background: #ddd;
+  padding: 5px 7px;
+  border-radius: 2px;
+}
+
+.demo-background-image {
+  display: block;
+  width: 800px;
+  height: 500px;
+  margin: 20px auto;
+  background-color: #ddd;
+  background-repeat: no-repeat;
 }
 
 
@@ -387,10 +411,6 @@ p.demo-credits {
   top: 25px;
 }
 
-.border--fixed {
-  position: fixed;
-}
-
 .border:hover {
   border-color: #ADD8C7;
 }
@@ -417,6 +437,11 @@ p.demo-credits {
 .border--text {
   left: 60%;
   top: 26px;
+}
+
+.border--fixed {
+  position: fixed;
+  top: 390px;
 }
 
 .icon {
