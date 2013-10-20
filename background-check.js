@@ -36,15 +36,16 @@
     }
 
     // Default values
+    attrs.debug         = checkAttr(a.debug, false);
+    attrs.debugOverlay  = checkAttr(a.debugOverlay, false);
     attrs.targets       = getElements(a.targets);
-    attrs.images        = getElements(a.images || 'img');
+    attrs.images        = getElements(a.images || 'img', true);
     attrs.changeParent  = checkAttr(a.changeParent, false);
     attrs.threshold     = checkAttr(a.threshold, 50);
     attrs.minComplexity = checkAttr(a.minComplexity, 30);
     attrs.minOverlap    = checkAttr(a.minOverlap, 50);
     attrs.windowEvents  = checkAttr(a.windowEvents, true);
     attrs.maxDuration   = checkAttr(a.maxDuration, 500);
-    attrs.debug         = checkAttr(a.debug, false);
 
     attrs.mask = checkAttr(a.mask, {
       r: 0,
@@ -128,9 +129,49 @@
 
 
   /*
+   * Convert elements with background-image
+   * to Images
+   */
+  function checkForCSSImages(els) {
+    var el,
+        url,
+        list = [];
+
+    for (var e = 0; e < els.length; e++) {
+      el = els[e];
+      list.push(el);
+
+      if (el.tagName !== 'IMG') {
+        url = window.getComputedStyle(el).backgroundImage;
+
+        // Ignore multiple backgrounds
+        if (url.split(',').length > 1) {
+          throw 'Multiple backgrounds are not supported';
+        }
+
+        if (url && url !== 'none') {
+
+          list[e] = {
+            img: new Image(),
+            el: list[e]
+          };
+
+          list[e].img.src = url.slice(4, -1);
+          log('CSS Image - ' + url);
+        } else {
+          throw 'Element is not an <img> but does not have a background-image';
+        }
+      }
+    }
+
+    return list;
+  }
+
+
+  /*
    * Check for String, Element or NodeList
    */
-  function getElements(selector) {
+  function getElements(selector, convertToImages) {
     var els = selector;
 
     if (typeof selector === 'string') {
@@ -142,6 +183,10 @@
     if (!els || els.length === 0 || els.length === undefined) {
       throw 'Elements not found';
     } else {
+      if (convertToImages) {
+        els = checkForCSSImages(els);
+      }
+
       els = Array.prototype.slice.call(els);
     }
 
@@ -160,6 +205,23 @@
       supported = true;
     } else {
       supported = false;
+    }
+
+    showDebugOverlay();
+  }
+
+
+  /*
+   * Show <canvas> on top of page
+   */
+  function showDebugOverlay() {
+
+    if (get('debugOverlay')) {
+      canvas.style.opacity = 0.5;
+      canvas.style.pointerEvents = 'none';
+      document.body.appendChild(canvas);
+    } else {
+      canvas.remove();
     }
   }
 
@@ -198,11 +260,211 @@
 
 
   /*
+   * Process px and %, discard anything else
+   */
+  function getValue(css, parent, delta) {
+    var value;
+    var percentage;
+
+    if (css.indexOf('px') !== -1) {
+      value = parseFloat(css);
+    } else if (css.indexOf('%') !== -1) {
+      value = parseFloat(css);
+      percentage = value / 100;
+      value = percentage * parent;
+
+      if (delta) {
+        value -= delta * percentage;
+      }
+    } else {
+      value = parent;
+    }
+
+    return value;
+  }
+
+
+  /*
+   * Find top, left, width and height
+   * from the object's CSS
+   */
+  function calculateAreaFromCSS(obj) {
+
+    /*
+      Supported
+      ---------
+      background-size: cover, contain, auto, px, %
+      background-position: top, left, center, right, bottom, px, %
+
+      Current Limitations
+      -------------------
+      Multiple background images not supported
+      background-repeat is forced to 'no-repeat'
+      background-origin is forced to 'padding-box'
+    */
+
+    var css = window.getComputedStyle(obj.el),
+        size = css.backgroundSize.split(' '),
+        position = css.backgroundPosition.split(' '),
+        x = css.backgroundPositionX,
+        y = css.backgroundPositionY,
+        parentRatio = obj.el.clientWidth / obj.el.clientHeight,
+        imgRatio = obj.img.naturalWidth / obj.img.naturalHeight,
+        width = size[0],
+        height = size[1] === undefined ? 'auto' : size[1];
+
+    // Force no-repeat and padding-box
+    obj.el.style.backgroundRepeat = 'no-repeat';
+    obj.el.style.backgroundOrigin = 'padding-box';
+
+    // Background Size
+    if (width === 'cover') {
+
+      if (parentRatio >= imgRatio) {
+        width = '100%';
+        height = 'auto';
+      } else {
+        width = 'auto';
+        size[0] = 'auto';
+        height = '100%';
+      }
+    } else if (width === 'contain') {
+
+      if (1 / parentRatio < 1 / imgRatio) {
+        width = 'auto';
+        size[0] = 'auto';
+        height = '100%';
+      } else {
+        width = '100%';
+        height = 'auto';
+      }
+    }
+
+    if (width === 'auto') {
+      width = obj.img.naturalWidth;
+    } else {
+      width = getValue(width, obj.el.clientWidth);
+    }
+
+    if (height === 'auto') {
+      height = (width / obj.img.naturalWidth) * obj.img.naturalHeight;
+    } else {
+      height = getValue(height, obj.el.clientHeight);
+    }
+
+    if (size[0] === 'auto' && size[1] !== 'auto') {
+      width = (height / obj.img.naturalHeight) * obj.img.naturalWidth;
+    }
+
+    // Background Position
+    x = getValue(x, obj.el.clientWidth, width);
+    y = getValue(y, obj.el.clientHeight, height);
+
+    // Take care of ex: background-position: right 20px bottom 20px;
+    if (position.length === 4) {
+
+      if (position[0] === 'right') {
+        x = obj.el.clientWidth - obj.img.naturalWidth - x;
+      }
+
+      if (position[2] === 'bottom') {
+        y = obj.el.clientHeight - obj.img.naturalHeight - y;
+      }
+    }
+
+    x += obj.el.getBoundingClientRect().left;
+    y += obj.el.getBoundingClientRect().top;
+
+    return {
+      left: x,
+      right: x + width,
+      top: y,
+      bottom: y + height,
+      width: width,
+      height: height
+    };
+  }
+
+
+  /*
+   * Get Bounding Client Rect
+   */
+  function getArea(obj) {
+    var area,
+        image,
+        parent,
+        ratio,
+        delta;
+
+    if (obj.nodeType) {
+      area = obj.getBoundingClientRect();
+      parent = obj.parentNode;
+      image = obj;
+
+      area = {
+        top: area.top,
+        width: area.width,
+        left: area.left,
+        right: area.right,
+        height: area.height,
+        bottom: area.bottom
+      };
+
+    } else {
+      area = calculateAreaFromCSS(obj);
+      parent = obj.el;
+      image = obj.img;
+    }
+
+    parent = parent.getBoundingClientRect();
+
+    area.imageTop = 0;
+    area.imageLeft = 0;
+    area.imageWidth = image.naturalWidth;
+    area.imageHeight = image.naturalHeight;
+    ratio = area.imageHeight / area.height;
+
+    // Stay within the parent's boundary
+    if (area.top < parent.top) {
+      delta = parent.top - area.top;
+      area.imageTop = ratio * delta;
+      area.imageHeight -= ratio * delta;
+      area.top += delta;
+      area.height -= delta;
+    }
+
+    if (area.left < parent.left) {
+      delta = parent.left - area.left;
+      area.imageLeft += ratio * delta;
+      area.imageWidth -= ratio * delta;
+      area.width -= delta;
+      area.left += delta;
+    }
+
+    if (area.bottom > parent.bottom) {
+      delta = area.bottom - parent.bottom;
+      area.imageHeight -= ratio * delta;
+      area.height -= delta;
+    }
+
+    if (area.right > parent.right) {
+      delta = area.right - parent.right;
+      area.imageWidth -= ratio * delta;
+      area.width -= delta;
+    }
+
+    return area;
+  }
+
+
+  /*
    * Render image on canvas
    */
   function drawImage(image) {
-    var area = image.getBoundingClientRect();
-    context.drawImage(image, area.left, area.top, area.width, area.height);
+    var area = getArea(image);
+
+    image = image.nodeType ? image : image.img;
+    context.drawImage(image, area.imageLeft, area.imageTop, area.imageWidth, area.imageHeight, area.left, area.top, area.width, area.height);
   }
 
 
@@ -277,7 +539,7 @@
    * Test if a is within b's boundary
    */
   function isInside(a, b) {
-    a = a.getBoundingClientRect();
+    a = (a.nodeType ? a : a.el).getBoundingClientRect();
     b = b === viewport ? b : b.getBoundingClientRect();
 
     return !(a.right < b.left || a.left > b.right || a.top > b.bottom || a.bottom < b.top);
@@ -356,6 +618,9 @@
     var sorted = false;
 
     images.sort(function (a, b) {
+      a = a.nodeType ? a : a.el;
+      b = b.nodeType ? b : b.el;
+
       var pos = a.compareDocumentPosition(b),
           reverse = 0;
 
@@ -474,7 +739,7 @@
     if (property === 'targets' || property === 'images') {
 
       try {
-        newValue = getElements(property === 'images' && !newValue ? 'img' : newValue);
+        newValue = getElements(property === 'images' && !newValue ? 'img' : newValue, property === 'images' ? true : false);
       } catch (err) {
         newValue = [];
         throw err;
@@ -486,6 +751,10 @@
     removeClasses();
     attrs[property] = newValue;
     check();
+
+    if (property === 'debugOverlay') {
+      showDebugOverlay();
+    }
   }
 
 
