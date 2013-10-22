@@ -1,4 +1,3 @@
-
 /*
  * BackgroundCheck
  * http://kennethcachia.com/background-check
@@ -42,7 +41,7 @@
     attrs.threshold = a.threshold || 50;
     attrs.minComplexity = a.minComplexity || 30;
     attrs.minOverlap = a.minOverlap || 50;
-    attrs.windowEvents = a.windowEvents || true;
+    attrs.windowEvents = (a.windowEvents || false) && true;
     attrs.maxDuration = a.maxDuration || 500;
     attrs.mask = a.mask || { r: 0, g: 255, b: 0 };
     attrs.debug = a.debug || false;
