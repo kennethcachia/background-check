@@ -100,6 +100,7 @@
     }
   }
 
+
   /*
    * Check for String, Element or NodeList
    */
@@ -153,7 +154,7 @@
 
 
   /*
-   * Set widh and height of <canvas>
+   * Set width and height of <canvas>
    */
   function resizeCanvas() {
     viewport = {
