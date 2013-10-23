@@ -3,7 +3,7 @@
  * BackgroundCheck
  * http://kennethcachia.com/background-check
  *
- * v1.1.0
+ * v1.1.1
  */
 
 (function (root, factory) {
