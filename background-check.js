@@ -36,21 +36,27 @@
     }
 
     // Default values
-    attrs.targets = getElements(a.targets);
-    attrs.images = getElements(a.images || 'img');
-    attrs.changeParent = a.changeParent || false;
-    attrs.threshold = a.threshold || 50;
-    attrs.minComplexity = a.minComplexity || 30;
-    attrs.minOverlap = a.minOverlap || 50;
-    attrs.windowEvents = a.windowEvents || true;
-    attrs.maxDuration = a.maxDuration || 500;
-    attrs.mask = a.mask || { r: 0, g: 255, b: 0 };
-    attrs.debug = a.debug || false;
-    attrs.classes = a.classes || {
+    attrs.targets       = getElements(a.targets);
+    attrs.images        = getElements(a.images || 'img');
+    attrs.changeParent  = checkAttr(a.changeParent, false);
+    attrs.threshold     = checkAttr(a.threshold, 50);
+    attrs.minComplexity = checkAttr(a.minComplexity, 30);
+    attrs.minOverlap    = checkAttr(a.minOverlap, 50);
+    attrs.windowEvents  = checkAttr(a.windowEvents, true);
+    attrs.maxDuration   = checkAttr(a.maxDuration, 500);
+    attrs.debug         = checkAttr(a.debug, false);
+
+    attrs.mask = checkAttr(a.mask, {
+      r: 0,
+      g: 255,
+      b: 0
+    });
+
+    attrs.classes = checkAttr(a.classes, {
       dark: 'background--dark',
       light: 'background--light',
       complex: 'background--complex'
-    };
+    });
 
     if (supported === undefined) {
       checkSupport();
@@ -102,6 +108,26 @@
 
 
   /*
+   * Get attribute value, use a default
+   * when undefined
+   */
+  function checkAttr(value, def) {
+    checkType(value, typeof def);
+    return (value === undefined) ? def : value;
+  }
+
+
+  /*
+   * Reject unwanted types
+   */
+  function checkType(value, type) {
+    if (value !== undefined && typeof value !== type) {
+      throw 'Incorrect attribute type';
+    }
+  }
+
+
+  /*
    * Check for String, Element or NodeList
    */
   function getElements(selector) {
@@ -109,11 +135,11 @@
 
     if (typeof selector === 'string') {
       els = document.querySelectorAll(selector);
-    } else if (selector.nodeType === 1) {
+    } else if (selector && selector.nodeType === 1) {
       els = [selector];
     }
 
-    if (!els || els.length === 0) {
+    if (!els || els.length === 0 || els.length === undefined) {
       throw 'Elements not found';
     }
 
@@ -372,6 +398,8 @@
         newValue = [];
         throw err;
       }
+    } else {
+      checkType(newValue, typeof attrs[property]);
     }
 
     removeClasses();
