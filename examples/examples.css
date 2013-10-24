@@ -151,7 +151,7 @@ a:hover {
 
 .examples li:not(:last-child):after {
   color: #999;
-  content: " -";
+  content: " •";
 }
 
 
