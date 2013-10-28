@@ -177,6 +177,13 @@ a:hover {
   height: 400px;
 }
 
+.demo-images--stacked {
+  position: relative;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .demo h2 {
   position: absolute;
   top: 40px;
@@ -189,6 +196,27 @@ a:hover {
   vertical-align: top;
   margin: 0 20px;
   width: 300px;
+}
+
+.demo-images--stacked img {
+  position: absolute;
+  top: 0;
+  margin: 0;
+}
+
+.demo-images--stacked .demo-image-first {
+  left: 0;
+  z-index: auto;
+}
+
+.demo-images--stacked .demo-image-second {
+  left: 23%;
+  z-index: 5;
+}
+
+.demo-images--stacked .demo-image-third {
+  left: 66%;
+  z-index: 1;
 }
 
 .demo--single img {
@@ -434,4 +462,73 @@ p.demo-credits {
 
 .icon.background--light.background--complex {
   background: #aaa;
+}
+
+
+/* ==========================================================================
+   FlexSlider
+   ========================================================================== */
+
+.flexslider {
+  position: relative;
+  overflow: hidden;
+  margin: 60px auto 0 auto;
+  width: 500px;
+  max-height: 300px;
+}
+
+.flexslider .slides {
+  margin: 0;
+  padding: 0;
+}
+
+.flex-control-nav {
+  display: none;
+}
+
+.flex-direction-nav {
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: -12px;
+}
+
+.flex-direction-nav li {
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.flex-direction-nav li a {
+  padding: 5px 15px 8px 15px;
+  border: 2px solid #fff;
+  font-size: 20px;
+  line-height: 1em;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+
+  -webkit-transition: color, border-color 0.1s ease-out;
+  -moz-transition: color, border-color 0.1s ease-out;
+  -ms-transition: color, border-color 0.1s ease-out;
+  -o-transition: color, border-color 0.1s ease-out;
+  transition: color, border-color 0.1s ease-out;
+}
+
+.flex-direction-nav li a.background--light {
+  color: #222;
+  border-color: #222;
+}
+
+.flex-direction-nav li:first-child {
+  left: 10px;
+}
+
+.flex-direction-nav li:last-child {
+  right: 10px;
 }
