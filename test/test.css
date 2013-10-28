@@ -1,6 +1,6 @@
 
 /* ==========================================================================
-   Basic markup
+   Layout
    ========================================================================== */
 
 .test,
@@ -26,4 +26,21 @@ img {
 .slide {
   position: absolute;
   top: 0;
+}
+
+.target {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+}
+
+.target--one {
+  top: 90px;
+  left: 200px;
+}
+
+.target--two {
+  top: 90px;
+  left: 215px;
 }
