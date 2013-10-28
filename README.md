@@ -9,7 +9,7 @@ Automatically switch to a darker or a lighter version of an element depending on
 + [Fixed Nav](http://kennethcachia.com/background-check/fixed-nav.html)
 + [Cross-Origin Request](http://www.kennethcachia.com/background-check/cross-origin.html)
 
-**Using BackgroundCheck with FlexSlider**
+**Using BackgroundCheck with other plugins**
 
 + [FlexSlider &mdash; Slide](http://www.kennethcachia.com/background-check/third-party/flexslider.html)
 + [FlexSlider &mdash; Fade](http://www.kennethcachia.com/background-check/third-party/flexslider-fade.html)
