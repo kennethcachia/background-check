@@ -2,11 +2,17 @@
 
 Automatically switch to a darker or a lighter version of an element depending on the brightness of images behind it.
 
+**Examples**
+
 + [Project Page](http://kennethcachia.com/background-check/)
 + [Slider](http://kennethcachia.com/background-check/slider.html)
 + [Fixed Nav](http://kennethcachia.com/background-check/fixed-nav.html)
 + [Cross-Origin Request](http://www.kennethcachia.com/background-check/cross-origin.html)
-+ [FlexSlider](http://www.kennethcachia.com/background-check/third-party/flexslider.html)
+
+**Using BackgroundCheck with FlexSlider**
+
++ [FlexSlider &mdash; Slide](http://www.kennethcachia.com/background-check/third-party/flexslider.html)
++ [FlexSlider &mdash; Fade](http://www.kennethcachia.com/background-check/third-party/flexslider-fade.html)
 
 ##How it works
 
