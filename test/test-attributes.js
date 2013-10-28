@@ -6,11 +6,11 @@ test('Test attribute values with .init() and .get()', function () {
   }, 'throws exception when no attributes are passed to init()');
 
   BackgroundCheck.init({
-    targets: '.target'
+    targets: '.test .target'
   });
 
-  deepEqual(BackgroundCheck.get('targets'), targets, 'returns a NodeList with all targets');
-  deepEqual(BackgroundCheck.get('images'), images, 'returns all images when img is undefined');
+  deepEqual(BackgroundCheck.get('targets'), targetsArray, 'returns an array with all targets');
+  deepEqual(BackgroundCheck.get('images'), allImages, 'returns all images when img is undefined');
   strictEqual(BackgroundCheck.get('changeParent'), false, 'default value is correct - changeParent');
   strictEqual(BackgroundCheck.get('threshold'), 50, 'default value is correct - threshold');
   strictEqual(BackgroundCheck.get('minComplexity'), 30, 'default value is correct - minComplexity');
@@ -32,13 +32,13 @@ test('Test attribute values with .init() and .get()', function () {
   }, 'default value is correct - classes');
 
   BackgroundCheck.init({
-    targets: document.querySelectorAll('.target')
+    targets: document.querySelectorAll('.test .target')
   });
 
-  deepEqual(BackgroundCheck.get('targets'), targets, 'returns an array of targets');
+  deepEqual(BackgroundCheck.get('targets'), targetsArray, 'returns an array of targets');
 
   BackgroundCheck.init({
-    targets: document.querySelector('.target')
+    targets: document.querySelector('.test .target')
   });
 
   deepEqual(BackgroundCheck.get('targets'), [target], 'returns an array with one target');
@@ -63,7 +63,7 @@ test('Test attribute values with .init() and .get()', function () {
   }, 'throws exception - targets: 1');
 
   BackgroundCheck.init({
-    targets: '.target',
+    targets: '.test .target',
     images: images,
     changeParent: true,
     windowEvents: false,
@@ -71,7 +71,7 @@ test('Test attribute values with .init() and .get()', function () {
     debug: true
   });
 
-  strictEqual(BackgroundCheck.get('images'), images, 'returns a NodeList with all images');
+  deepEqual(BackgroundCheck.get('images'), Array.prototype.slice.call(images), 'returns an array with all images');
   strictEqual(BackgroundCheck.get('changeParent'), true, 'returns changeParent as true');
   strictEqual(BackgroundCheck.get('windowEvents'), false, 'returns windowEvents as false');
   strictEqual(BackgroundCheck.get('threshold'), 60, 'returns threshold as 60');
@@ -117,10 +117,10 @@ test('Setting attribute values', function () {
   }, 'throws elements not found');
 
   BackgroundCheck.set('targets', targets);
-  deepEqual(BackgroundCheck.get('targets'), targets, 'returns a NodeList of targets');
+  deepEqual(BackgroundCheck.get('targets'), targetsArray, 'returns an array of targets');
 
-  BackgroundCheck.set('targets', '.target');
-  deepEqual(BackgroundCheck.get('targets'), targets, 'returns a NodeList of targets');
+  BackgroundCheck.set('targets', '.test .target');
+  deepEqual(BackgroundCheck.get('targets'), targetsArray, 'returns an array of targets');
 
   BackgroundCheck.set('targets', target);
   deepEqual(BackgroundCheck.get('targets'), [target], 'returns an array with one target');

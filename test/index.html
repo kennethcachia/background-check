@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>BackgroundCheck</title>
+
   <link rel="stylesheet" href="qunit.css">
+  <link rel="stylesheet" href="test.css">
 </head>
 <body>
   <div id="qunit"></div>
@@ -12,22 +14,39 @@
   <script src="../background-check.min.js"></script>
   <script src="qunit.js"></script>
 
-  <div style="display:none">
-    <img src="../examples/images/1.jpg" />
-    <img src="../examples/images/1.jpg" />
+  <!-- Basic markup -->
+  <div class="test">
+    <img class="image--one" src="../examples/images/2.jpg" />
+    <img class="image--two" src="../examples/images/4.jpg" />
+    <img class="image--three" src="../examples/images/5.jpg" />
     <div class="target"></div>
     <div class="target"></div>
+    <div class="placeholder"></div>
   </div>
 
-  <div class="placeholder"></div>
+  <!-- Images within a wrapper div -->
+  <div class="test--fragmented">
+    <div class="slide slide--one"><img class="image--one" src="../examples/images/2.jpg" /></div>
+    <div class="slide slide--two"><img class="image--two" src="../examples/images/4.jpg" /></div>
+    <div class="slide slide--three"><img class="image--three" src="../examples/images/5.jpg" /></div>
+    <div class="target"></div>
+    <div class="target"></div>
+    <div class="placeholder"></div>
+  </div>
 
   <script>
-    var targets = document.querySelectorAll('.target');
-    var target = document.querySelector('.target');
-    var images = document.querySelectorAll('img');
-    var placeholder = document.querySelector('.placeholder');
+    var wrapper = document.querySelector('.test');
+    var images = wrapper.querySelectorAll('img');
+    var targets = wrapper.querySelectorAll('.target');
+    var target = wrapper.querySelector('.target');
+    var placeholder = wrapper.querySelector('.placeholder');
+    var targetsArray = Array.prototype.slice.call(targets);
+
+    // Get an array of ALL images for when BackgroundCheck defaults to all images on page
+    var allImages = Array.prototype.slice.call(document.querySelectorAll('img'));
   </script>
 
   <script src="test-attributes.js"></script>
+  <script src="test-zindex.js"></script>
 </body>
 </html>

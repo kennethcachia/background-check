@@ -1,0 +1,29 @@
+
+/* ==========================================================================
+   Basic markup
+   ========================================================================== */
+
+.test,
+.test--fragmented {
+  display: none;
+  position: relative;
+  height: 500px;
+}
+
+img {
+  position: absolute;
+  width: 240px;
+}
+
+.image--two {
+  left: 120px;
+}
+
+.image--three {
+  left: 300px;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+}
