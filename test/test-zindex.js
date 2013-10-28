@@ -195,33 +195,33 @@
     slide3.style.position = 'static';
     runTest([image1, image2, image3]);
 
+
+    /* 
+     * Current Limitations - the following
+     * tests fail
+    
     reset();
     setSlideOrder(null, null, null);
     setImageOrder(5, 4, 3);
     slide1.style.position = 'static';
     slide2.style.position = 'static';
     slide3.style.position = 'static';
-    runTest([image3, image2, image1]);
+    runTest([image3, image2, image1]);   -- Fails on IE
 
     reset();
     setSlideOrder(null, 100, null);
     setImageOrder(5, 4, 3);
     slide1.style.position = 'static';
     slide3.style.position = 'static';
-    runTest([image3, image1, image2]);
+    runTest([image3, image1, image2]);   -- Fails on IE
 
-    /* 
-     * Current Limitations - the following
-     * tests fail
-     *
     reset();
     setSlideOrder(3, 2, 2);
     setImageOrder(5, 6, 7);
     image3.style.position = 'static';
     image3.style.marginLeft = '50px';
-    runTest([image2, image3, image1]);
-    // returns: 3, 2, 1
-    //*/
+    runTest([image2, image3, image1]);   -- Fails
+    */
 
   });
 
