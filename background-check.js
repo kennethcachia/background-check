@@ -141,6 +141,8 @@
 
     if (!els || els.length === 0 || els.length === undefined) {
       throw 'Elements not found';
+    } else {
+      els = Array.prototype.slice.call(els);
     }
 
     return els;
@@ -318,16 +320,82 @@
 
 
   /*
+   * Find the element's zIndex. Also checks
+   * the zIndex of its parent
+   */
+  function getZIndex(el) {
+    var parent = el.parentNode,
+        zIndexEl,
+        zIndexParent,
+        calculate = function (el) {
+          var zindex = 0;
+
+          if (window.getComputedStyle(el).position !== 'static') {
+            zindex = parseInt(window.getComputedStyle(el).zIndex, 10) || 0;
+
+            // Reserve zindex = 0 for elements with position: static;
+            if (zindex >= 0) {
+              zindex++;
+            }
+          }
+
+          return zindex;
+        };
+
+    zIndexParent = parent ? calculate(parent) : 0;
+    zIndexEl = calculate(el);
+
+    return (zIndexParent * 100000) + zIndexEl;
+  }
+
+
+  /*
+   * Check zIndexes
+   */
+  function sortImagesByZIndex(images) {
+    var sorted = false;
+
+    images.sort(function (a, b) {
+      var pos = a.compareDocumentPosition(b),
+          reverse = 0;
+
+      a = getZIndex(a);
+      b = getZIndex(b);
+
+      if (a > b) {
+        sorted = true;
+      }
+
+      // Reposition if zIndex is the same but the objects are not
+      // sorted according to their document position
+      if (a === b && pos === 2) {
+        reverse = 1;
+      }
+
+      return reverse || a - b;
+    });
+
+    log('Sorted: ' + sorted);
+
+    if (sorted) {
+      log(images);
+    }
+
+    return sorted;
+  }
+
+
+  /*
    * Main function
    */
   function check(target, avoidClear, imageLoaded) {
     var image,
         loading = false,
         mask = get('mask'),
+        sorted,
         processImages = imageLoaded ? [imageLoaded] : get('images');
 
     log('--- BackgroundCheck ---');
-    log('Loading: ' + loading);
     log('onLoad event: ' + (imageLoaded && imageLoaded.src));
 
     if (supported) {
@@ -338,6 +406,8 @@
         context.fillRect(0, 0, canvas.width, canvas.height);
       }
 
+      sorted = sortImagesByZIndex(processImages);
+
       for (var i = 0; i < processImages.length; i++) {
         image = processImages[i];
 
@@ -346,7 +416,16 @@
           if (image.naturalWidth === 0) {
             loading = true;
             log('Loading... ' + image.src);
-            image.addEventListener('load', check.bind(null, target, true, image));
+
+            image.removeEventListener('load', check);
+
+            if (sorted) {
+              // Sorted -- redraw all images
+              image.addEventListener('load', check.bind(null, null, false, null));
+            } else {
+              // Not sorted -- just draw one image
+              image.addEventListener('load', check.bind(null, target, true, image));
+            }
           } else {
             log('Drawing: ' + image.src);
             drawImage(image);
