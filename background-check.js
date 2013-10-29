@@ -366,10 +366,12 @@
         sorted = true;
       }
 
-      // Reposition if zIndex is the same but the objects are not
+      // Reposition if zIndex is the same but the elements are not
       // sorted according to their document position
       if (a === b && pos === 2) {
         reverse = 1;
+      } else if (a === b && pos === 4) {
+        reverse = -1;
       }
 
       return reverse || a - b;
