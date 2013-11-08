@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>BackgroundCheck</title>
 
+  <link rel="stylesheet" href="../examples/normalize.css">
   <link rel="stylesheet" href="qunit.css">
   <link rel="stylesheet" href="test.css">
 </head>
@@ -34,6 +35,47 @@
     <div class="placeholder"></div>
   </div>
 
+  <!-- Test css backgrounds -->
+  <div class="test--css-backgrounds">
+    <div class="css-background"><p>Default</p></div>
+    <div class="css-background"><p>background-size: 50%;</p></div>
+    <div class="css-background"><p>background-size: 50% 30%;</p></div>
+    <div class="css-background"><p>background-size: 200px;</p></div>
+    <div class="css-background"><p>background-size: auto;</p></div>
+    <div class="css-background"><p>background-size: 200px auto;</p></div>
+    <div class="css-background"><p>background-size: auto 200px;</p></div>
+    <div class="css-background"><p>background-size: cover;</p></div>
+    <div class="css-background"><p>background-size: contain;</p></div>
+    <div class="css-background"><p>background-position: 20px 0;</p></div>
+    <div class="css-background"><p>background-position: 0 50px;</p></div>
+    <div class="css-background"><p>background-position: 50% 0;</p></div>
+    <div class="css-background"><p>background-position: 50% 50%;</p></div>
+    <div class="css-background"><p>background-position: 50% 100%;</p></div>
+    <div class="css-background"><p>background-position: 50px 75%;</p></div>
+    <div class="css-background"><p>background-position: 25% 35px;</p></div>
+    <div class="css-background"><p>background-position: top;</p></div>
+    <div class="css-background"><p>background-position: top left;</p></div>
+    <div class="css-background"><p>background-position: top right;</p></div>
+    <div class="css-background"><p>background-position: top center;</p></div>
+    <div class="css-background"><p>background-position: center 50px;</p></div>
+    <div class="css-background"><p>background-position: center 25%;</p></div>
+    <div class="css-background"><p>background-position: right 60px;</p></div>
+    <div class="css-background"><p>background-position: right 25%;</p></div>
+    <div class="css-background"><p>background-position: left 35px;</p></div>
+    <div class="css-background"><p>background-position: left 15%;</p></div>
+    <div class="css-background"><p>background-position: 520px bottom;</p></div>
+    <div class="css-background"><p>background-position: 520px 300px;</p></div>
+    <div class="css-background"><p>background-position: -50px 100px;</p></div>
+    <div class="css-background"><p>background-position: 20px bottom;</p></div>
+    <div class="css-background"><p>background-position: 15% bottom;</p></div>
+
+    <!-- Safari has issues with Four-value syntax -->
+    <div class="css-background"><p>background-position: right 10px bottom;</p></div>
+    <div class="css-background"><p>background-position: right bottom 10px;</p></div>
+    <div class="css-background"><p>background-position: right 10px bottom 20px;</p></div>
+    <div class="css-background"><p>background-position: right 10% bottom 20%;</p></div>
+  </div>
+
   <script>
     var wrapper = document.querySelector('.test');
     var images = wrapper.querySelectorAll('img');
@@ -47,7 +89,12 @@
   </script>
 
   <script src="test-classes.js"></script>
+  <script src="test-delayed-loading.js"></script>
   <script src="test-attributes.js"></script>
   <script src="test-zindex.js"></script>
+
+  <script src="css-backgrounds-expected.js"></script>
+  <script src="test-css-backgrounds.js"></script>
+
 </body>
 </html>

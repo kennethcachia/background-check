@@ -5,7 +5,8 @@
 
 .test,
 .test--fragmented {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
   position: relative;
   height: 500px;
 }
@@ -43,4 +44,40 @@ img {
 .target--two {
   top: 90px;
   left: 215px;
+}
+
+.test--css-backgrounds {
+  pointer-events: none;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+.css-background {
+  text-align: center;
+}
+
+.css-background p {
+  display: inline-block;
+  max-width: none;
+  margin: 30px auto;
+  font-family: monaco, monospace;
+  font-size: 13px;
+  background: #ddd;
+  padding: 5px 7px;
+  border-radius: 2px;
+}
+
+.css-background-image {
+  display: block;
+  width: 800px;
+  height: 500px;
+  margin: 20px auto;
+  background-color: #ddd;
+  background-repeat: no-repeat;
 }
