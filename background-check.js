@@ -156,8 +156,12 @@
             el: list[e]
           };
 
-          list[e].img.src = url.slice(4, -1);
+          url = url.slice(4, -1);
+          url = url.replace(/"/g, '');
+
+          list[e].img.src = url;
           log('CSS Image - ' + url);
+
         } else {
           throw 'Element is not an <img> but does not have a background-image';
         }
@@ -221,7 +225,10 @@
       canvas.style.pointerEvents = 'none';
       document.body.appendChild(canvas);
     } else {
-      canvas.remove();
+      // Check if it was previously added
+      if (canvas.parentNode) {
+        canvas.parentNode.removeChild(canvas);
+      }
     }
   }
 
@@ -285,8 +292,8 @@
 
 
   /*
-   * Find top, left, width and height
-   * from the object's CSS
+   * Calculate top, left, width and height
+   * using the object's CSS
    */
   function calculateAreaFromCSS(obj) {
 
@@ -306,12 +313,12 @@
     var css = window.getComputedStyle(obj.el),
         size = css.backgroundSize.split(' '),
         position = css.backgroundPosition.split(' '),
-        x = css.backgroundPositionX,
-        y = css.backgroundPositionY,
         parentRatio = obj.el.clientWidth / obj.el.clientHeight,
         imgRatio = obj.img.naturalWidth / obj.img.naturalHeight,
         width = size[0],
-        height = size[1] === undefined ? 'auto' : size[1];
+        height = size[1] === undefined ? 'auto' : size[1],
+        x,
+        y;
 
     // Force no-repeat and padding-box
     obj.el.style.backgroundRepeat = 'no-repeat';
@@ -328,6 +335,7 @@
         size[0] = 'auto';
         height = '100%';
       }
+
     } else if (width === 'contain') {
 
       if (1 / parentRatio < 1 / imgRatio) {
@@ -356,6 +364,17 @@
       width = (height / obj.img.naturalHeight) * obj.img.naturalWidth;
     }
 
+    // Two-value syntax vs Four-value syntax
+    if (position.length === 4) {
+      x = position[1];
+      y = position[3];
+    } else {
+      x = position[0];
+      y = position[1];
+    }
+
+    y = y || x;
+
     // Background Position
     x = getValue(x, obj.el.clientWidth, width);
     y = getValue(y, obj.el.clientHeight, height);
@@ -376,12 +395,12 @@
     y += obj.el.getBoundingClientRect().top;
 
     return {
-      left: x,
-      right: x + width,
-      top: y,
-      bottom: y + height,
-      width: width,
-      height: height
+      left: Math.floor(x),
+      right: Math.floor(x + width),
+      top: Math.floor(y),
+      bottom: Math.floor(y + height),
+      width: Math.floor(width),
+      height: Math.floor(height)
     };
   }
 
@@ -400,16 +419,6 @@
       area = obj.getBoundingClientRect();
       parent = obj.parentNode;
       image = obj;
-
-      area = {
-        top: area.top,
-        width: area.width,
-        left: area.left,
-        right: area.right,
-        height: area.height,
-        bottom: area.bottom
-      };
-
     } else {
       area = calculateAreaFromCSS(obj);
       parent = obj.el;
@@ -422,6 +431,7 @@
     area.imageLeft = 0;
     area.imageWidth = image.naturalWidth;
     area.imageHeight = image.naturalHeight;
+
     ratio = area.imageHeight / area.height;
 
     // Stay within the parent's boundary
@@ -453,6 +463,11 @@
       area.width -= delta;
     }
 
+    area.imageTop = Math.floor(area.imageTop);
+    area.imageLeft = Math.floor(area.imageLeft);
+    area.imageHeight = Math.floor(area.imageHeight);
+    area.imageWidth = Math.floor(area.imageWidth);
+
     return area;
   }
 
@@ -464,7 +479,9 @@
     var area = getArea(image);
 
     image = image.nodeType ? image : image.img;
-    context.drawImage(image, area.imageLeft, area.imageTop, area.imageWidth, area.imageHeight, area.left, area.top, area.width, area.height);
+    context.drawImage(image,
+                      area.imageLeft, area.imageTop, area.imageWidth, area.imageHeight,
+                      area.left, area.top, area.width, area.height);
   }
 
 
@@ -540,7 +557,7 @@
    */
   function isInside(a, b) {
     a = (a.nodeType ? a : a.el).getBoundingClientRect();
-    b = b === viewport ? b : b.getBoundingClientRect();
+    b = b === viewport ? b : (b.nodeType ? b : b.el).getBoundingClientRect();
 
     return !(a.right < b.left || a.left > b.right || a.top > b.bottom || a.bottom < b.top);
   }
@@ -555,7 +572,7 @@
    */
   function processTargets(checkTarget) {
     var start = new Date().getTime(),
-        mode = (checkTarget && checkTarget.tagName === 'IMG') ? 'image' : 'targets',
+        mode = (checkTarget && (checkTarget.tagName === 'IMG' || checkTarget.img)) ? 'image' : 'targets',
         found = checkTarget ? false : true,
         total = get('targets').length,
         target;
@@ -657,6 +674,7 @@
    */
   function check(target, avoidClear, imageLoaded) {
     var image,
+        imageNode,
         loading = false,
         mask = get('mask'),
         sorted,
@@ -679,19 +697,20 @@
         image = processImages[i];
 
         if (isInside(image, viewport)) {
+          imageNode = image.nodeType ? image : image.img;
 
-          if (image.naturalWidth === 0) {
+          if (imageNode.naturalWidth === 0) {
             loading = true;
             log('Loading... ' + image.src);
 
-            image.removeEventListener('load', check);
+            imageNode.removeEventListener('load', check);
 
             if (sorted) {
               // Sorted -- redraw all images
-              image.addEventListener('load', check.bind(null, null, false, null));
+              imageNode.addEventListener('load', check.bind(null, null, false, null));
             } else {
               // Not sorted -- just draw one image
-              image.addEventListener('load', check.bind(null, target, true, image));
+              imageNode.addEventListener('load', check.bind(null, target, true, image));
             }
           } else {
             log('Drawing: ' + image.src);
@@ -771,6 +790,24 @@
   }
 
 
+  /*
+   * Get position and size of all images.
+   * Used for testing purposes
+   */
+  function getImageData() {
+    var images = get('images'),
+        area,
+        data = [];
+
+    for (var i = 0; i < images.length; i++) {
+      area = getArea(images[i]);
+      data.push(area);
+    }
+
+    return data;
+  }
+
+
   return {
     /*
      * Init and destroy
@@ -787,7 +824,12 @@
      * Setters and getters
      */
     set: set,
-    get: get
+    get: get,
+
+    /*
+     * Return image data
+     */
+    getImageData: getImageData
   };
 
 }));
