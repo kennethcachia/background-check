@@ -34,9 +34,8 @@
 
 
   function moveSlider(e) {
-    var target = e.target,
-        dataPos = target.getAttribute('data-pos'),
-        pos;
+    var target = e.target;
+    var dataPos = target.getAttribute('data-pos');
 
     if (typeof dataPos === 'string') {
       x = parseInt(dataPos, 10);
@@ -48,7 +47,8 @@
 
     x = x > (slides.length - 1) ? (slides.length - 1) : x;
     x = x < 0 ? 0 : x;
-    pos = x * -delta;
+
+    var pos = x * -delta;
 
     if (prefixes[0]) {
       strip.style[prefixes[0]] = 'translate3d(' + pos + '%, 0px, 0px)';

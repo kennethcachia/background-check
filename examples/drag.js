@@ -25,8 +25,8 @@
 
 
   function getUIElement(el, child) {
-    var name = 'border',
-        required;
+    var name = 'border';
+    var required;
 
     if (el.className.indexOf(name) !== -1) {
       required = child ? el.children[0] : el;
