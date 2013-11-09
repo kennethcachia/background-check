@@ -8,6 +8,13 @@
 
 asyncTest('Test CSS Backgrounds', function () {
 
+  throws(function () {
+    BackgroundCheck.init({
+      targets: '.test .target',
+      images: '.test--css-backgrounds .css-background'
+    });
+  }, 'throws exception - elements are not images and do not have a background image');
+
   // Create elements first
   var examples = document.querySelectorAll('.test--css-backgrounds .css-background'),
       snippets = document.querySelectorAll('.test--css-backgrounds .css-background p'),
