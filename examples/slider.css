@@ -33,6 +33,7 @@
   position: absolute;
   left: 50%;
   bottom: 25px;
+  font-size: 0;
 }
 
 .slider-dot {
@@ -79,6 +80,10 @@
   -ms-transition: color, border-color 0.1s ease-out;
   -o-transition: color, border-color 0.1s ease-out;
   transition: color, border-color 0.1s ease-out;
+}
+
+.slider-arrow--hidden {
+  display: none;
 }
 
 .slider-arrow--left {

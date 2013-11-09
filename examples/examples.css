@@ -232,6 +232,40 @@ p.demo-credits {
   background-repeat: no-repeat;
 }
 
+.demo-css--fullscreen,
+.demo-css--fullscreen .slider,
+.demo-css--fullscreen .slider-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.demo-css--fullscreen .slider-item {
+  height: 100%;
+}
+
+.demo-css--fullscreen .slider-item {
+  background-size: cover;
+  background-position: center;
+}
+
+.demo-css--fullscreen .slider-item--one {
+  background-image: url(images/9.jpg);
+}
+
+.demo-css--fullscreen .slider-item--two {
+  background-image: url(images/8.jpg);
+}
+
+.demo-css--fullscreen .slider-item--three {
+  background-image: url(images/7.jpg);
+}
+
 
 /* ==========================================================================
    Download
