@@ -406,7 +406,18 @@
     var parent;
 
     if (obj.nodeType) {
-      area = obj.getBoundingClientRect();
+      var rect = obj.getBoundingClientRect();
+
+      // Clone ClientRect for modification purposes
+      area = {
+        left: rect.left,
+        right: rect.right,
+        top: rect.top,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height
+      };
+
       parent = obj.parentNode;
       image = obj;
     } else {
