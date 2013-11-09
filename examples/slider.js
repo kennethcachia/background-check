@@ -1,17 +1,17 @@
 
 /* global BackgroundCheck:false */
 
-var Slider = (function () {
+(function () {
 
-  var arrows,
-      strip,
-      slides,
-      dotsWrapper,
-      dots,
-      clickTargets,
-      x = 0,
-      delta,
-      prefixes;
+  var arrows;
+  var strip;
+  var slides;
+  var dotsWrapper;
+  var dots;
+  var clickTargets;
+  var x = 0;
+  var delta;
+  var prefixes;
 
 
   function init() {
@@ -126,11 +126,7 @@ var Slider = (function () {
   }
 
 
-  return {
-    init: init
-  };
+  // Init
+  window.addEventListener('DOMContentLoaded', init);
 
 }());
-
-
-window.addEventListener('DOMContentLoaded', Slider.init);

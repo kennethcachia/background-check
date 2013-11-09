@@ -229,6 +229,7 @@ p.demo-credits {
   background-color: #ccc;
   margin: 30px auto 60px auto;
   background-image: url(images/4.jpg);
+  background-repeat: no-repeat;
 }
 
 

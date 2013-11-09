@@ -16,14 +16,14 @@ asyncTest('Test CSS Backgrounds', function () {
   }, 'throws exception - elements are not images and do not have a background image');
 
   // Create elements first
-  var examples = document.querySelectorAll('.test--css-backgrounds .css-background'),
-      snippets = document.querySelectorAll('.test--css-backgrounds .css-background p'),
-      css,
-      image = 1,
-      rule,
-      element,
-      dash,
-      snippet;
+  var examples = document.querySelectorAll('.test--css-backgrounds .css-background');
+  var snippets = document.querySelectorAll('.test--css-backgrounds .css-background p');
+  var css;
+  var image = 1;
+  var rule;
+  var element;
+  var dash;
+  var snippet;
 
   for (var e = 0; e < examples.length; e++) {
     snippet = snippets[e].innerHTML;

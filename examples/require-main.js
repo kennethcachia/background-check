@@ -1,4 +1,4 @@
 
-require(["background-check.min"], function (BackgroundCheck) {
+require(['background-check.min'], function (BackgroundCheck) {
   console.log(BackgroundCheck);
 });
