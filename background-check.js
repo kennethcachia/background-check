@@ -18,13 +18,14 @@
 
   'use strict';
 
-  var resizeEvent = window.orientation !== undefined ? 'orientationchange' : 'resize',
-      supported,
-      canvas,
-      context,
-      throttleDelay,
-      viewport,
-      attrs = {};
+  var resizeEvent = window.orientation !== undefined ? 'orientationchange' : 'resize';
+  var supported;
+  var canvas;
+  var context;
+  var throttleDelay;
+  var viewport;
+  var attrs = {};
+
 
   /*
    * Initializer
@@ -102,6 +103,7 @@
    * Output debug logs
    */
   function log(msg) {
+
     if (get('debug')) {
       console.log(msg);
     }
@@ -122,6 +124,7 @@
    * Reject unwanted types
    */
   function checkType(value, type) {
+
     if (value !== undefined && typeof value !== type) {
       throw 'Incorrect attribute type';
     }
@@ -133,9 +136,9 @@
    * to Images
    */
   function checkForCSSImages(els) {
-    var el,
-        url,
-        list = [];
+    var el;
+    var url;
+    var list = [];
 
     for (var e = 0; e < els.length; e++) {
       el = els[e];
@@ -150,7 +153,6 @@
         }
 
         if (url && url !== 'none') {
-
           list[e] = {
             img: new Image(),
             el: list[e]
@@ -161,7 +163,6 @@
 
           list[e].img.src = url;
           log('CSS Image - ' + url);
-
         } else {
           throw 'Element is not an <img> but does not have a background-image';
         }
@@ -187,6 +188,7 @@
     if (!els || els.length === 0 || els.length === undefined) {
       throw 'Elements not found';
     } else {
+
       if (convertToImages) {
         els = checkForCSSImages(els);
       }
@@ -225,6 +227,7 @@
       canvas.style.pointerEvents = 'none';
       document.body.appendChild(canvas);
     } else {
+
       // Check if it was previously added
       if (canvas.parentNode) {
         canvas.parentNode.removeChild(canvas);
@@ -296,35 +299,20 @@
    * using the object's CSS
    */
   function calculateAreaFromCSS(obj) {
-
-    /*
-      Supported
-      ---------
-      background-size: cover, contain, auto, px, %
-      background-position: top, left, center, right, bottom, px, %
-
-      Current Limitations
-      -------------------
-      Multiple background images not supported
-      background-repeat is forced to 'no-repeat'
-      background-origin is forced to 'padding-box'
-    */
-
-    var css = window.getComputedStyle(obj.el),
-        size = css.backgroundSize.split(' '),
-        position = css.backgroundPosition.split(' '),
-        parentRatio = obj.el.clientWidth / obj.el.clientHeight,
-        imgRatio = obj.img.naturalWidth / obj.img.naturalHeight,
-        width = size[0],
-        height = size[1] === undefined ? 'auto' : size[1],
-        x,
-        y;
+    var css = window.getComputedStyle(obj.el);
 
     // Force no-repeat and padding-box
     obj.el.style.backgroundRepeat = 'no-repeat';
     obj.el.style.backgroundOrigin = 'padding-box';
 
     // Background Size
+    var size = css.backgroundSize.split(' ');
+    var width = size[0];
+    var height = size[1] === undefined ? 'auto' : size[1];
+
+    var parentRatio = obj.el.clientWidth / obj.el.clientHeight;
+    var imgRatio = obj.img.naturalWidth / obj.img.naturalHeight;
+
     if (width === 'cover') {
 
       if (parentRatio >= imgRatio) {
@@ -365,6 +353,10 @@
     }
 
     // Two-value syntax vs Four-value syntax
+    var position = css.backgroundPosition.split(' ');
+    var x;
+    var y;
+
     if (position.length === 4) {
       x = position[1];
       y = position[3];
@@ -409,11 +401,9 @@
    * Get Bounding Client Rect
    */
   function getArea(obj) {
-    var area,
-        image,
-        parent,
-        ratio,
-        delta;
+    var area;
+    var image;
+    var parent;
 
     if (obj.nodeType) {
       area = obj.getBoundingClientRect();
@@ -432,7 +422,8 @@
     area.imageWidth = image.naturalWidth;
     area.imageHeight = image.naturalHeight;
 
-    ratio = area.imageHeight / area.height;
+    var ratio = area.imageHeight / area.height;
+    var delta;
 
     // Stay within the parent's boundary
     if (area.top < parent.top) {
@@ -490,8 +481,8 @@
    * their parents, depending on checkParent
    */
   function removeClasses(el) {
-    var targets = el ? [el] : get('targets'),
-        target;
+    var targets = el ? [el] : get('targets');
+    var target;
 
     for (var t = 0; t < targets.length; t++) {
       target = targets[t];
@@ -508,16 +499,16 @@
    * and add 'light' or 'dark' accordingly
    */
   function calculatePixelBrightness(target) {
-    var dims = target.getBoundingClientRect(),
-        brightness,
-        data,
-        pixels = 0,
-        delta,
-        deltaSqr = 0,
-        mean = 0,
-        variance,
-        minOverlap = 0,
-        mask = get('mask');
+    var dims = target.getBoundingClientRect();
+    var brightness;
+    var data;
+    var pixels = 0;
+    var delta;
+    var deltaSqr = 0;
+    var mean = 0;
+    var variance;
+    var minOverlap = 0;
+    var mask = get('mask');
 
     if (dims.width > 0 && dims.height > 0) {
       removeClasses(target);
@@ -571,11 +562,11 @@
    * to avoid processing all targets multiple times
    */
   function processTargets(checkTarget) {
-    var start = new Date().getTime(),
-        mode = (checkTarget && (checkTarget.tagName === 'IMG' || checkTarget.img)) ? 'image' : 'targets',
-        found = checkTarget ? false : true,
-        total = get('targets').length,
-        target;
+    var start = new Date().getTime();
+    var mode = (checkTarget && (checkTarget.tagName === 'IMG' || checkTarget.img)) ? 'image' : 'targets';
+    var found = checkTarget ? false : true;
+    var total = get('targets').length;
+    var target;
 
     for (var t = 0; t < total; t++) {
       target = get('targets')[t];
@@ -603,26 +594,24 @@
    * the zIndex of its parent
    */
   function getZIndex(el) {
-    var parent = el.parentNode,
-        zIndexEl,
-        zIndexParent,
-        calculate = function (el) {
-          var zindex = 0;
+    var calculate = function (el) {
+      var zindex = 0;
 
-          if (window.getComputedStyle(el).position !== 'static') {
-            zindex = parseInt(window.getComputedStyle(el).zIndex, 10) || 0;
+      if (window.getComputedStyle(el).position !== 'static') {
+        zindex = parseInt(window.getComputedStyle(el).zIndex, 10) || 0;
 
-            // Reserve zindex = 0 for elements with position: static;
-            if (zindex >= 0) {
-              zindex++;
-            }
-          }
+        // Reserve zindex = 0 for elements with position: static;
+        if (zindex >= 0) {
+          zindex++;
+        }
+      }
 
-          return zindex;
-        };
+      return zindex;
+    };
 
-    zIndexParent = parent ? calculate(parent) : 0;
-    zIndexEl = calculate(el);
+    var parent = el.parentNode;
+    var zIndexParent = parent ? calculate(parent) : 0;
+    var zIndexEl = calculate(el);
 
     return (zIndexParent * 100000) + zIndexEl;
   }
@@ -638,8 +627,8 @@
       a = a.nodeType ? a : a.el;
       b = b.nodeType ? b : b.el;
 
-      var pos = a.compareDocumentPosition(b),
-          reverse = 0;
+      var pos = a.compareDocumentPosition(b);
+      var reverse = 0;
 
       a = getZIndex(a);
       b = getZIndex(b);
@@ -673,17 +662,12 @@
    * Main function
    */
   function check(target, avoidClear, imageLoaded) {
-    var image,
-        imageNode,
-        loading = false,
-        mask = get('mask'),
-        sorted,
-        processImages = imageLoaded ? [imageLoaded] : get('images');
-
-    log('--- BackgroundCheck ---');
-    log('onLoad event: ' + (imageLoaded && imageLoaded.src));
 
     if (supported) {
+      var mask = get('mask');
+
+      log('--- BackgroundCheck ---');
+      log('onLoad event: ' + (imageLoaded && imageLoaded.src));
 
       if (avoidClear !== true) {
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -691,7 +675,12 @@
         context.fillRect(0, 0, canvas.width, canvas.height);
       }
 
-      sorted = sortImagesByZIndex(processImages);
+      var processImages = imageLoaded ? [imageLoaded] : get('images');
+      var sorted = sortImagesByZIndex(processImages);
+
+      var image;
+      var imageNode;
+      var loading = false;
 
       for (var i = 0; i < processImages.length; i++) {
         image = processImages[i];
@@ -795,9 +784,9 @@
    * Used for testing purposes
    */
   function getImageData() {
-    var images = get('images'),
-        area,
-        data = [];
+    var images = get('images');
+    var area;
+    var data = [];
 
     for (var i = 0; i < images.length; i++) {
       area = getArea(images[i]);
