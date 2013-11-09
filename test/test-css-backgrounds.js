@@ -51,9 +51,6 @@ asyncTest('Test CSS Backgrounds', function () {
 
   // Wait and test
   setTimeout(function () {
-    var test = document.querySelector('.test--css-backgrounds'),
-        runningClass = 'test--css-backgrounds--running';
-
     start();
     window.scrollTo(0, 0);
 
@@ -64,5 +61,17 @@ asyncTest('Test CSS Backgrounds', function () {
     });
 
     deepEqual(BackgroundCheck.getImageData(), CSS_BACKGROUNDS_EXPECTED, 'dimensions and coordinates match');
+
+    // Test for multiple backgrounds
+    var cssimage = document.querySelector('.test--css-backgrounds .css-background-image');
+    cssimage.style.backgroundImage = 'url("../examples/images/1.jpg"), url("../examples/images/1.jpg")';
+
+    throws(function () {
+      BackgroundCheck.init({
+        targets: '.test .target',
+        images: cssimage
+      });
+    }, 'throws exception - multiple backgrounds are not supported');
+
   }, 100);
 });
