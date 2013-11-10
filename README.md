@@ -11,8 +11,8 @@ Automatically switch to a darker or a lighter version of an element depending on
 
 **Using BackgroundCheck with other plugins**
 
-+ [FlexSlider &mdash; Slide](http://www.kennethcachia.com/background-check/third-party/flexslider.html)
-+ [FlexSlider &mdash; Fade](http://www.kennethcachia.com/background-check/third-party/flexslider-fade.html)
++ [FlexSlider &mdash; Slide](http://www.kennethcachia.com/background-check/flexslider.html)
++ [FlexSlider &mdash; Fade](http://www.kennethcachia.com/background-check/flexslider-fade.html)
 
 ##How it works
 
