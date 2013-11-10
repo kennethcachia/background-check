@@ -10,55 +10,74 @@
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="../normalize.css">
-    <link rel="stylesheet" href="../examples.css" >
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/examples.css" >
+    
 
+    
+    <script src="scripts/background-check.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="jquery.flexslider-min.js"></script>
-    <script src="../background-check.min.js"></script>
+    <script src="scripts/jquery.flexslider.min.js"></script>
+    
+    
   </head>
 
   <body>
+    
+
     <div class="header">
+      
       <h1>BackgroundCheck</h1>
       <p class="header-subtitle">Automatically switch to a darker or a lighter version of an element depending on the brightness of images behind it.</p>
+
 
       <div class="flexslider">
         <ul class="slides">
           <li>
-            <img src="../images/3.jpg" draggable="false" />
+            <img src="images/3.jpg" draggable="false" />
           </li>
           <li>
-            <img src="../images/1.jpg" draggable="false" />
+            <img src="images/1.jpg" draggable="false" />
           </li>
           <li>
-            <img src="../images/5.jpg" draggable="false" />
+            <img src="images/5.jpg" draggable="false" />
           </li>
           <li>
-            <img src="../images/6.jpg" draggable="false" />
+            <img src="images/6.jpg" draggable="false" />
           </li>
         </ul>
       </div>
 
+      
       <div class="download">
         <a class="button" href="http://github.com/kennethcachia/Background-Check">Github Project</a>
         <a class="button button--secondary" href="http://raw.github.com/kennethcachia/Background-Check/master/background-check.min.js">Download</a>
       </div>
-
-      <h2>More Demos</h2>
+      
+      <h2>Demos</h2>
       <ul class="examples">
-        <li><a href="../index.html">Project Page</a></li>
-        <li><a href="../css-backgrounds.html">CSS Backgrounds</a></li>
-        <li><a href="../css-backgrounds-fullscreen.html" target="_blank">CSS Backgrounds &mdash; Fullscreen</a></li>
-        <li><a href="../slider.html">Slider</a></li>
-        <li><a href="../fixed-nav.html">Fixed Nav</a></li>
-        <li><a href="../cross-origin.html">Cross-Origin Request</a></li>
-        <li><a href="../third-party/flexslider.html">FlexSlider &mdash; Slide</a></li>
-        <li><a href="../third-party/flexslider-fade.html">FlexSlider &mdash; Fade</a></li>
+        
+          <li><a href="index.html" >Project Page</a></li>
+        
+          <li><a href="css-backgrounds.html" >CSS Backgrounds</a></li>
+        
+          <li><a href="css-backgrounds-fullscreen.html" target="_blank">CSS Backgrounds — Fullscreen</a></li>
+        
+          <li><a href="slider.html" >Slider</a></li>
+        
+          <li><a href="fixed-nav.html" >Fixed Nav</a></li>
+        
+          <li><a href="cross-origin.html" >Cross Origin</a></li>
+        
+          <li><a href="flexslider.html" >FlexSlider — Slide</a></li>
+        
+          <li><a href="flexslider-fade.html" >FlexSlider — Fade</a></li>
+        
       </ul>
     </div>
 
-    <div class="footer container container--narrow">
+    
+    <div class="footer container">
       <span class="twitter-share">
         <a href="https://twitter.com/share" class="twitter-share-button" data-dnt="true" data-count="none" data-text="BackgroundCheck &mdash; Automatically switch to a darker or a lighter version of an element.">Tweet</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -86,6 +105,7 @@
       });
     </script>
 
+    
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-18542897-1']);
@@ -96,6 +116,6 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-    </script> 
+    </script>
   </body>
 </html>

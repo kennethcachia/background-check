@@ -1,0 +1,80 @@
+---
+scripts: ["drag", "main"]
+---
+
+    <div class="header">
+      {{> header}}
+      {{> drag}}
+
+      <div class="demo">
+        <div class="demo-images">
+          <img src="images/2.jpg" draggable="false" />
+          <img src="images/4.jpg" draggable="false" />
+          <img src="images/5.jpg" draggable="false" />
+        </div>
+
+        {{> targets}}
+      </div>
+
+      {{> download}}
+      {{> nav}}
+    </div>
+
+    <div class="content container">
+      <div class="content-row">
+        <h2>How it works</h2>
+
+        <div class="content-thirds">
+          <div class="content-third">
+            <p>If an element overlaps any of the images, either <span class="snippet">.background--dark</span> or <span class="snippet">.background--light</span> is added to it. BackgroundCheck does not change an element's style &mdash; you must do so using CSS.</p>
+
+            <a class="button" href="http://github.com/kennethcachia/Background-Check/blob/master/README.md">More Info</a>
+          </div>
+
+          <div class="content-third">
+            <div class="content-code">
+              <h3>Original Style</h3>
+              <pre>.label {<br>  color: blue;<br>}</pre>
+            </div>
+          </div>
+
+          <div class="content-third">
+            <div class="content-code">
+              <h3>Additional Styles</h3>
+              <pre>.label.background--light {<br>  color: black;<br>}<br><br>.label.background--dark {<br>  color: white;<br>}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-row">
+        <h2>How to use</h2>
+
+        <div class="content-thirds">
+          <div class="content-third">
+            <div class="content-code">
+              <pre>BackgroundCheck.init({<br>  targets: '.ui'<br>});</pre>
+              <p>Check all elements with a <strong>.ui</strong> class against all images on the page.</p>
+              <a class="button" href="http://github.com/kennethcachia/Background-Check/blob/master/README.md">More Info</a>
+            </div>
+          </div>
+
+          <div class="content-third">
+            <div class="content-code">
+              <pre>BackgroundCheck.init({<br>  targets: '.ui',<br>  images: '.thumbnail'<br>});</pre>
+              <p>Check all elements with a <strong>.ui</strong> class against all images with a <strong>.thumbnail</strong> class.</p>
+            </div>
+          </div>
+
+          <div class="content-third">
+            <div class="content-code">
+              <pre>// All targets<br>BackgroundCheck.refresh();<br><br>// Specific target<br>BackgroundCheck.refresh(e.target);</pre>
+              <p>Reprocess all or specific targets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{> footer}}
+    {{> ga}}

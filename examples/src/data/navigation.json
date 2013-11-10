@@ -1,0 +1,46 @@
+{
+  "navigation": [
+
+    {
+      "label": "Project Page",
+      "url": "index"
+    },
+
+    {
+      "label": "CSS Backgrounds",
+      "url": "css-backgrounds"
+    },
+
+    {
+      "label": "CSS Backgrounds — Fullscreen",
+      "url": "css-backgrounds-fullscreen",
+      "blank": true
+    },
+
+    {
+      "label": "Slider",
+      "url": "slider"
+    },
+
+    {
+      "label": "Fixed Nav",
+      "url": "fixed-nav"
+    },
+
+    {
+      "label": "Cross Origin",
+      "url": "cross-origin"
+    },
+
+    {
+      "label": "FlexSlider — Slide",
+      "url": "flexslider"
+    },
+
+    {
+      "label": "FlexSlider — Fade",
+      "url": "flexslider-fade"
+    }
+
+  ]
+}

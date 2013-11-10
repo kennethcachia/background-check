@@ -1,0 +1,51 @@
+---
+jQuery: true,
+scripts: ["jquery.flexslider.min"]
+---
+
+    <div class="header">
+      {{> header}}
+
+      <div class="flexslider">
+        <ul class="slides">
+          <li>
+            <img src="images/3.jpg" draggable="false" />
+          </li>
+          <li>
+            <img src="images/1.jpg" draggable="false" />
+          </li>
+          <li>
+            <img src="images/5.jpg" draggable="false" />
+          </li>
+          <li>
+            <img src="images/6.jpg" draggable="false" />
+          </li>
+        </ul>
+      </div>
+
+      {{> download}}
+      {{> nav}}
+    </div>
+
+    {{> footer}}
+
+    <script>
+      $(window).load(function() {
+        $('.flexslider').flexslider({
+          animation: 'slide',
+          prevText: '‹',
+          nextText: '›',
+          start: function () {
+            BackgroundCheck.init({
+              targets: '.flex-direction-nav li a',
+              images: '.flexslider img'
+            });
+          },
+          after: function () {
+            BackgroundCheck.refresh();
+          }
+        });
+      });
+    </script>
+
+    {{> ga}}

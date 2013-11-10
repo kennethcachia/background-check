@@ -1,0 +1,32 @@
+---
+scripts: ["drag", "css-backgrounds"]
+---
+
+    <div class="header">
+      {{> header}}
+      {{> drag}}
+
+      <div class="demo">
+        <div class="demo-images demo-images--flexible">
+          <pre class="code--small">background-position: center;</pre>
+          <div class="demo-css" style="background-position: center;"></div>
+
+          <pre class="code--small">background-position: top left;</pre>
+          <div class="demo-css" style="background-position: top left;"></div>
+
+          <pre class="code--small">background-position: bottom right;</pre>
+          <div class="demo-css" style="background-position: bottom right;"></div>
+
+          <pre class="code--small">background-size: 50%;<br/>background-position: top right;</pre>
+          <div class="demo-css" style="background-size: 50%; background-position: top right;"></div>
+        </div>
+
+        {{> targets-fixed}}
+      </div>
+
+      {{> download}}
+      {{> nav}}
+    </div>
+
+    {{> footer}}
+    {{> ga}}

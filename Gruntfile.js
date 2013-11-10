@@ -8,16 +8,37 @@ module.exports = function (grunt) {
     watch: {
       source: {
         files: ['background-check.js'],
-        tasks: ['clean', 'jshint', 'uglify', 'copy']
+        tasks: ['clean:source', 'jshint', 'uglify', 'copy']
       },
+
       examples: {
-        files: ['examples/*.js', '!examples/*.min.js'],
+        files: ['examples/src/*/*.*'],
+        tasks: ['clean:examples', 'assemble']
+      },
+
+      examplesJS: {
+        files: ['examples/build/scripts/*.js', '!examples/build/scripts/*.min.js'],
         tasks: ['jshint']
       }
     },
 
+    assemble: {
+      options: {
+        flatten: true,
+        data: 'examples/src/data/*.json',
+        layout: 'examples/src/layouts/default.hbs',
+        partials: ['examples/src/partials/*.hbs']
+      },
+      build: {
+        files: [{
+          src: ['examples/src/pages/*.hbs'],
+          dest: 'examples/build/'
+        }]
+      }
+    },
+
     jshint: {
-      files: ['background-check.js', 'examples/*.js', '!examples/*.min.js'],
+      files: ['background-check.js', 'examples/build/scripts/*.js', '!examples/build/scripts/*.min.js'],
       options: {
         'white': true,
         'indent': 2,
@@ -40,7 +61,8 @@ module.exports = function (grunt) {
     },
 
     clean: {
-      all: ['background-check.min.js', 'examples/background-check.min.js']
+      source: ['background-check.min.js', 'examples/build/scripts/background-check.min.js'],
+      examples: ['examples/build/*.html']
     },
 
     uglify: {
@@ -56,12 +78,13 @@ module.exports = function (grunt) {
     copy: {
       min: {
         src: 'background-check.min.js',
-        dest: 'examples/background-check.min.js'
+        dest: 'examples/build/scripts/background-check.min.js'
       }
     }
 
   });
 
+  grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');

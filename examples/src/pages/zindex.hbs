@@ -1,0 +1,23 @@
+---
+scripts: ["drag", "main"]
+---
+
+    <div class="header">
+      {{> header}}
+
+      <div class="demo">
+        <div class="demo-images demo-images--stacked">
+          <img class="demo-image-first" src="images/2.jpg" draggable="false" />
+          <img class="demo-image-second" src="images/4.jpg" draggable="false" />
+          <img class="demo-image-third" src="images/5.jpg" draggable="false" />
+        </div>
+
+        {{> targets}}
+      </div>
+
+      {{> download}}
+      {{> nav}}
+    </div>
+
+    {{> footer}}
+    {{> ga}}

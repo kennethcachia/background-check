@@ -29,7 +29,7 @@ asyncTest('Test CSS Backgrounds', function () {
     snippet = snippets[e].innerHTML;
 
     element = document.createElement('div');
-    element.style.backgroundImage = 'url("../examples/images/' + image + '.jpg")';
+    element.style.backgroundImage = 'url("../examples/build/images/' + image + '.jpg")';
     element.classList.add('css-background-image');
 
     css = snippet.split(';');
@@ -64,7 +64,7 @@ asyncTest('Test CSS Backgrounds', function () {
 
     // Test for multiple backgrounds
     var cssimage = document.querySelector('.test--css-backgrounds .css-background-image');
-    cssimage.style.backgroundImage = 'url("../examples/images/1.jpg"), url("../examples/images/1.jpg")';
+    cssimage.style.backgroundImage = 'url("../examples/build/images/1.jpg"), url("../examples/build/images/1.jpg")';
 
     throws(function () {
       BackgroundCheck.init({

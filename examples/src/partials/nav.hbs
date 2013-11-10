@@ -1,0 +1,7 @@
+
+      <h2>Demos</h2>
+      <ul class="examples">
+        {{#each navigation}}
+          <li><a href="{{url}}.html" {{#if blank}}target="_blank"{{/if}}>{{label}}</a></li>
+        {{/each}}
+      </ul>

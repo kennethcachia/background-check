@@ -1,0 +1,38 @@
+---
+styles: ["slider"]
+scripts: ["slider"]
+---
+
+    <div class="header">
+      {{> header}}
+
+      <div class="slider">
+        <div class="slider-strip">
+          <div class="slider-item">
+            <img src="images/3.jpg" draggable="false" />
+          </div>
+
+          <div class="slider-item">
+            <img src="images/1.jpg" draggable="false" />
+          </div>
+
+          <div class="slider-item">
+            <img src="images/5.jpg" draggable="false" />
+          </div>
+
+          <div class="slider-item">
+            <img src="images/6.jpg" draggable="false" />
+          </div>
+        </div>
+
+        <div class="slider-arrow slider-arrow--left">&#8249;</div>
+        <div class="slider-arrow slider-arrow--right">&#8250;</div>
+        <div class="slider-dots"></div>
+      </div>
+
+      {{> download}}
+      {{> nav}}
+    </div>
+
+    {{> footer}}
+    {{> ga}}

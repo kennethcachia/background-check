@@ -104,6 +104,7 @@ a:hover {
    ========================================================================== */
 
 .header {
+  position: relative;
   background: #f6f6f6;
   padding: 100px 0 80px 0;
   text-align: center;
@@ -228,7 +229,7 @@ p.demo-credits {
   height: 300px;
   background-color: #ccc;
   margin: 30px auto 60px auto;
-  background-image: url(images/4.jpg);
+  background-image: url(../images/4.jpg);
   background-repeat: no-repeat;
 }
 
@@ -255,15 +256,15 @@ p.demo-credits {
 }
 
 .demo-css--fullscreen .slider-item--one {
-  background-image: url(images/9.jpg);
+  background-image: url(../images/9.jpg);
 }
 
 .demo-css--fullscreen .slider-item--two {
-  background-image: url(images/8.jpg);
+  background-image: url(../images/8.jpg);
 }
 
 .demo-css--fullscreen .slider-item--three {
-  background-image: url(images/7.jpg);
+  background-image: url(../images/7.jpg);
 }
 
 
