@@ -352,11 +352,27 @@
       width = (height / obj.img.naturalHeight) * obj.img.naturalWidth;
     }
 
-    // Two-value syntax vs Four-value syntax
-    var position = css.backgroundPosition.split(' ');
+    var position = css.backgroundPosition;
+
+    // Fix inconsistencies between browsers
+    if (position === 'top') {
+      position = '50% 0%';
+    } else if (position === 'left') {
+      position = '0% 50%';
+    } else if (position === 'right') {
+      position = '100% 50%';
+    } else if (position === 'bottom') {
+      position = '50% 100%';
+    } else if (position === 'center') {
+      position = '50% 50%';
+    }
+
+    position = position.split(' ');
+
     var x;
     var y;
 
+    // Two-value syntax vs Four-value syntax
     if (position.length === 4) {
       x = position[1];
       y = position[3];
@@ -365,7 +381,8 @@
       y = position[1];
     }
 
-    y = y || x;
+    // Use a default value
+    y = y || '50%';
 
     // Background Position
     x = getValue(x, obj.el.clientWidth, width);
@@ -481,9 +498,14 @@
     var area = getArea(image);
 
     image = image.nodeType ? image : image.img;
-    context.drawImage(image,
-                      area.imageLeft, area.imageTop, area.imageWidth, area.imageHeight,
-                      area.left, area.top, area.width, area.height);
+
+    if (area.imageWidth > 0 && area.imageHeight > 0 && area.width > 0 && area.height > 0) {
+      context.drawImage(image,
+                        area.imageLeft, area.imageTop, area.imageWidth, area.imageHeight,
+                        area.left, area.top, area.width, area.height);
+    } else {
+      log('Skipping image - ' + image.src + ' - area too small');
+    }
   }
 
 
