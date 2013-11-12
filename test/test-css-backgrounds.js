@@ -15,6 +15,18 @@ asyncTest('Test CSS Backgrounds', function () {
     });
   }, 'throws exception - elements are not images and do not have a background image');
 
+
+  // Test for multiple backgrounds
+  var multiple = document.querySelector('.test--css-backgrounds .css-background--multiple');
+
+  throws(function () {
+    BackgroundCheck.init({
+      targets: '.test .target',
+      images: multiple
+    });
+  }, 'throws exception - multiple backgrounds are not supported');
+
+
   // Create elements first
   var examples = document.querySelectorAll('.test--css-backgrounds .css-background');
   var snippets = document.querySelectorAll('.test--css-backgrounds .css-background p');
@@ -41,7 +53,13 @@ asyncTest('Test CSS Backgrounds', function () {
       if (rule.length > 1) {
         dash = rule[0].indexOf('-');
         rule[0] = rule[0].substring(0, dash) + rule[0][dash + 1].toUpperCase() + rule[0].substring(dash + 2);
-        element.style[rule[0]] = rule[1];
+
+        // Weird issue - Chrome sets backgroundPosition: inherit inherit
+        if (rule[0] === 'backgroundPosition' && rule[1] === 'inherit') {
+          element.style.backgroundPositionX = 'inherit';
+        } else {
+          element.style[rule[0]] = rule[1];
+        }
       }
     }
 
@@ -61,17 +79,5 @@ asyncTest('Test CSS Backgrounds', function () {
     });
 
     deepEqual(BackgroundCheck.getImageData(), CSS_BACKGROUNDS_EXPECTED, 'dimensions and coordinates match');
-
-    // Test for multiple backgrounds
-    var cssimage = document.querySelector('.test--css-backgrounds .css-background-image');
-    cssimage.style.backgroundImage = 'url("../examples/build/images/1.jpg"), url("../examples/build/images/1.jpg")';
-
-    throws(function () {
-      BackgroundCheck.init({
-        targets: '.test .target',
-        images: cssimage
-      });
-    }, 'throws exception - multiple backgrounds are not supported');
-
   }, 100);
 });

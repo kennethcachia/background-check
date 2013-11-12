@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>BackgroundCheck</title>
 
-  <link rel="stylesheet" href="../examples/normalize.css">
+  <link rel="stylesheet" href="../examples/build/styles/normalize.css">
   <link rel="stylesheet" href="qunit.css">
   <link rel="stylesheet" href="test.css">
 </head>
@@ -74,6 +74,30 @@
     <div class="css-background"><p>background-position: right bottom 10px;</p></div>
     <div class="css-background"><p>background-position: right 10px bottom 20px;</p></div>
     <div class="css-background"><p>background-position: right 10% bottom 20%;</p></div>
+
+    <div class="css-background"><p>background-position: 5cm 8cm;</p></div>
+    <div class="css-background"><p>background-position: 2em 5em;</p></div>
+    <div class="css-background"><p>background-position: 2em 8cm;</p></div>
+    <div class="css-background"><p>background-position: 20% 4cm;</p></div>
+
+    <div class="css-background"><p>background-size: 5cm 8cm;</p></div>
+    <div class="css-background"><p>background-size: 2em 5em;</p></div>
+    <div class="css-background"><p>background-size: 2em 8cm;</p></div>
+    <div class="css-background"><p>background-size: 20% 4cm;</p></div>
+
+    <div class="css-background"><p>background-position: top;</p></div>
+    <div class="css-background"><p>background-position: left;</p></div>
+    <div class="css-background"><p>background-position: right;</p></div>
+    <div class="css-background"><p>background-position: bottom;</p></div>
+    <div class="css-background"><p>background-position: center;</p></div>
+    <div class="css-background"><p>background-position: 50px;</p></div>
+
+    <div class="css-background" style="background-position: 100px center; background-size: cover;">
+      <p>background-position: inherit;background-size: inherit;</p>
+    </div>
+
+    <!-- Test multiple backgrounds -->
+    <div class="css-background--multiple"></div>
   </div>
 
   <script>
