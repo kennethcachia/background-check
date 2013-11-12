@@ -14,10 +14,8 @@
     <link rel="stylesheet" href="styles/examples.css" >
     {{#each styles}}<link rel="stylesheet" href="styles/{{this}}.css" >
     {{/each}}
-
     {{#if requireJS}}<script data-main="scripts/require-main" src="scripts/require.min.js"></script>
-    {{else}}
-    <script src="scripts/background-check.min.js"></script>
+    {{else}}<script src="scripts/background-check.min.js"></script>
     {{#if jQuery}}<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>{{/if}}
     {{#each scripts}}<script src="scripts/{{this}}.js"></script>
     {{/each}}
