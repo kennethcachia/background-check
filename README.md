@@ -7,6 +7,8 @@ Automatically switch to a darker or a lighter version of an element depending on
 + [Project Page](http://kennethcachia.com/background-check/)
 + [Slider](http://kennethcachia.com/background-check/slider.html)
 + [Fixed Nav](http://kennethcachia.com/background-check/fixed-nav.html)
++ [CSS Backgrounds](http://www.kennethcachia.com/background-check/css-backgrounds.html)
++ [CSS Backgrounds &mdash; Fullscreen](http://www.kennethcachia.com/background-check/css-backgrounds-fullscreen.html)
 + [Cross-Origin Request](http://www.kennethcachia.com/background-check/cross-origin.html)
 
 **Using BackgroundCheck with other plugins**
@@ -126,6 +128,37 @@ Used with `.init()`, `.set()` or `.get()`
 + **maxDuration**: Maximum processing time allowed. Killed if it takes longer. *Default:* 500 (ms).
 + **mask**: Used internally when checking if an element overlaps any of the images. *Default:* `{ r: 0, g: 255, b: 0 }`
 + **debug**: Enable or disable logs. *Default*: false.
+
+##CSS Backgrounds
+
+BackgroundCheck can also be used on an element that has a `background-image`. For example:
+
+```css
+.thumbnail {
+  background-image: url(image.jpg);
+}
+```
+
+```js
+BackgroundCheck.init({
+  targets: '.target',
+  images: '.thumbnail'
+});
+```
+
+**Background Position and Size**
+
+Tested with the following units:
+
++ `background-size`: cover, contain, auto, inherit, cm, em, px and %
++ `background-position`: top, left, center, right, bottom, inherit, cm, em, px and %
+
+**Current Limitations**
+
++ `background-repeat` is not supported and is forced to `no-repeat`
++ `background-origin` is forced to `padding-box`
++ Multiple backgrounds are not supported
++ Four-value syntax can be used if the browser [supports it](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position#Specifications)
 
 ##Browser Support
 
