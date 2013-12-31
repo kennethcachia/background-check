@@ -42,7 +42,7 @@ asyncTest('Test CSS Backgrounds', function () {
 
     element = document.createElement('div');
     element.style.backgroundImage = 'url("../examples/build/images/' + image + '.jpg")';
-    element.classList.add('css-background-image');
+    element.className = 'css-background-image';
 
     css = snippet.split(';');
 

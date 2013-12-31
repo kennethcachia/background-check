@@ -50,7 +50,7 @@
         offset = { 
           x: e.offsetX || e.layerX,
           y: e.offsetY || e.layerY,
-          fixed: drag.classList.contains('border--fixed')
+          fixed: drag.className.indexOf('border--fixed') !== -1
         };
 
         window.addEventListener(touch ? 'touchmove' : 'mousemove', updatePosition);

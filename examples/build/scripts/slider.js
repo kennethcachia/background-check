@@ -84,20 +84,28 @@
   }
 
 
+  function classList(node, name, mode) {
+    var className = node.className;
+
+    switch (mode) {
+    case 'add':
+      className += ' ' + name;
+      break;
+    case 'remove':
+      var pattern = new RegExp('(?:^|\\s)' + name + '(?!\\S)', 'g');
+      className = className.replace(pattern, '');
+      break;
+    }
+
+    node.className = className.trim();
+  }
+
+
   function hideArrows() {
     var hiddenClass = 'slider-arrow--hidden';
 
-    if (x === 0) {
-      arrows[0].classList.add(hiddenClass);
-    } else {
-      arrows[0].classList.remove(hiddenClass);
-    }
-
-    if (x === slides.length - 1) {
-      arrows[1].classList.add(hiddenClass);
-    } else {
-      arrows[1].classList.remove(hiddenClass);
-    }
+    classList(arrows[0], hiddenClass, x === 0 ? 'add' : 'remove');
+    classList(arrows[1], hiddenClass, x === slides.length - 1 ? 'add' : 'remove');
   }
 
 
