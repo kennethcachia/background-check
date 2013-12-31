@@ -510,6 +510,26 @@
 
 
   /*
+   * Add/remove classes
+   */
+  function classList(node, name, mode) {
+    var className = node.className;
+
+    switch (mode) {
+    case 'add':
+      className += ' ' + name;
+      break;
+    case 'remove':
+      var pattern = new RegExp('(?:^|\\s)' + name + '(?!\\S)', 'g');
+      className = className.replace(pattern, '');
+      break;
+    }
+
+    node.className = className.trim();
+  }
+
+
+  /*
    * Remove classes from element or
    * their parents, depending on checkParent
    */
@@ -520,9 +540,10 @@
     for (var t = 0; t < targets.length; t++) {
       target = targets[t];
       target = get('changeParent') ? target.parentNode : target;
-      target.classList.remove(get('classes').light);
-      target.classList.remove(get('classes').dark);
-      target.classList.remove(get('classes').complex);
+      
+      classList(target, get('classes').light, 'remove');
+      classList(target, get('classes').dark, 'remove');
+      classList(target, get('classes').complex, 'remove');
     }
   }
 
@@ -566,10 +587,10 @@
         variance = Math.sqrt(deltaSqr / pixels) / 255;
         mean = mean / 255;
         log('Target: ' + target.className +  ' lum: ' + mean + ' var: ' + variance);
-        target.classList.add(mean <= (get('threshold') / 100) ? get('classes').dark : get('classes').light);
+        classList(target, mean <= (get('threshold') / 100) ? get('classes').dark : get('classes').light, 'add');
 
         if (variance > get('minComplexity') / 100) {
-          target.classList.add(get('classes').complex);
+          classList(target, get('classes').complex, 'add');
         }
       }
     }
