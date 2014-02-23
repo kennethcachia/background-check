@@ -233,6 +233,12 @@ p.demo-credits {
   background-repeat: no-repeat;
 }
 
+.demo-css--cross-origin {
+  background-size: contain;
+  background-position: center;
+  background-image: none;
+}
+
 .demo-css--fullscreen,
 .demo-css--fullscreen .slider,
 .demo-css--fullscreen .slider-strip {

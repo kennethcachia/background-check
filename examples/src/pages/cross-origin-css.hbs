@@ -1,0 +1,24 @@
+---
+scripts: ["drag", "cross-origin-css"]
+---
+
+    <div class="header">
+      {{> header}}
+      {{> drag}}
+
+      <div class="demo demo--single">
+        <div class="demo-css demo-css--cross-origin" data-src="//upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Centralpark.png/800px-Centralpark.png"></div>
+
+        <p class="demo-credits">
+          The image is served with <a href="http://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS" target="_blank"><strong>access-control-allow-origin: *</strong></a> from <a href="http://en.wikipedia.org/wiki/File:Centralpark.png" target="_blank">Wikipedia</a>.
+        </p>
+
+        {{> targets}}
+      </div>
+
+      {{> download}}
+      {{> nav}}
+    </div>
+
+    {{> footer}}
+    {{> ga}}
