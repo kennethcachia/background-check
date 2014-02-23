@@ -33,6 +33,11 @@
     },
 
     {
+      "label": "Cross Origin — CSS Backgrounds",
+      "url": "cross-origin-css"
+    },
+
+    {
       "label": "FlexSlider — Slide",
       "url": "flexslider"
     },
