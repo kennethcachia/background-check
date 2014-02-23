@@ -148,7 +148,7 @@
         url = window.getComputedStyle(el).backgroundImage;
 
         // Ignore multiple backgrounds
-        if (url.split(',').length > 1) {
+        if (url.split(/,url|, url/).length > 1) {
           throw 'Multiple backgrounds are not supported';
         }
 
