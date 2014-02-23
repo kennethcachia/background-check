@@ -16,7 +16,7 @@ asyncTest('Test CSS Backgrounds', function () {
   }, 'throws exception - elements are not images and do not have a background image');
 
 
-  // Test for multiple backgrounds
+  // Tests for multiple backgrounds
   var multiple = document.querySelector('.test--css-backgrounds .css-background--multiple');
 
   throws(function () {
@@ -24,7 +24,52 @@ asyncTest('Test CSS Backgrounds', function () {
       targets: '.test .target',
       images: multiple
     });
-  }, 'throws exception - multiple backgrounds are not supported');
+  }, 'throws exception - multiple backgrounds are not supported (1)');
+
+  throws(function () {
+    multiple.style.backgroundImage = 'url(../examples/build/images/1.jpg), url(' + window.DataURI + ')';
+
+    BackgroundCheck.init({
+      targets: '.test .target',
+      images: multiple
+    });
+  }, 'throws exception - multiple backgrounds are not supported (2)');
+
+  throws(function () {
+    multiple.style.backgroundImage = 'url(' + window.DataURI + '), url(../examples/build/images/1.jpg)';
+
+    BackgroundCheck.init({
+      targets: '.test .target',
+      images: multiple
+    });
+  }, 'throws exception - multiple backgrounds are not supported (3)');
+
+  throws(function () {
+    multiple.style.backgroundImage = 'url(' + window.DataURI + '), url(' + window.DataURI + ')';
+
+    BackgroundCheck.init({
+      targets: '.test .target',
+      images: multiple
+    });
+  }, 'throws exception - multiple backgrounds are not supported (4)');
+
+  throws(function () {
+    multiple.style.backgroundImage = 'url(' + window.DataURI + '), url(' + window.DataURI + '), url(' + window.DataURI + ')';
+
+    BackgroundCheck.init({
+      targets: '.test .target',
+      images: multiple
+    });
+  }, 'throws exception - multiple backgrounds are not supported (5)');
+
+  throws(function () {
+    multiple.style.backgroundImage = 'url(../examples/build/images/1.jpg), url(../examples/build/images/1.jpg), url(../examples/build/images/1.jpg)';
+
+    BackgroundCheck.init({
+      targets: '.test .target',
+      images: multiple
+    });
+  }, 'throws exception - multiple backgrounds are not supported (6)');
 
 
   // Create elements first
@@ -36,12 +81,15 @@ asyncTest('Test CSS Backgrounds', function () {
   var element;
   var dash;
   var snippet;
+  var url;
 
   for (var e = 0; e < examples.length; e++) {
     snippet = snippets[e].innerHTML;
 
+    url = image === 1 ? window.DataURI : '../examples/build/images/' + image + '.jpg';
+
     element = document.createElement('div');
-    element.style.backgroundImage = 'url("../examples/build/images/' + image + '.jpg")';
+    element.style.backgroundImage = 'url(' + url + ')';
     element.className = 'css-background-image';
 
     css = snippet.split(';');
