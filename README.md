@@ -10,6 +10,7 @@ Automatically switch to a darker or a lighter version of an element depending on
 + [CSS Backgrounds](http://www.kennethcachia.com/background-check/css-backgrounds.html)
 + [CSS Backgrounds &mdash; Fullscreen](http://www.kennethcachia.com/background-check/css-backgrounds-fullscreen.html)
 + [Cross-Origin Request](http://www.kennethcachia.com/background-check/cross-origin.html)
++ [Cross-Origin Request &mdash; CSS Backgrounds](http://www.kennethcachia.com/background-check/cross-origin-css.html)
 
 **Using BackgroundCheck with other plugins**
 
