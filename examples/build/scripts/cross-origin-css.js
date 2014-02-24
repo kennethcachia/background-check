@@ -15,7 +15,7 @@ function convertImageToDataURI(img) {
 
 document.addEventListener('DOMContentLoaded', function () {
   var img = new Image();
-  img.setAttribute('crossorigin');
+  img.setAttribute('crossorigin', '');
 
   var background = document.querySelector('.demo-css--cross-origin');
   var dataSrc = background.getAttribute('data-src');
