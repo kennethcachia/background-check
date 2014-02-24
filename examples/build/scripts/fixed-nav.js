@@ -1,7 +1,7 @@
 
 /* global BackgroundCheck:false */
 
-window.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
   BackgroundCheck.init({
     targets: '.fixed-nav'
   });

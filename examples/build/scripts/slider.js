@@ -164,6 +164,6 @@
 
 
   // Init
-  window.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', init);
 
 }());

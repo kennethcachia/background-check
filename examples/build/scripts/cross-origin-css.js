@@ -13,7 +13,7 @@ function convertImageToDataURI(img) {
 }
 
 
-window.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
   var img = new Image();
   img.setAttribute('crossorigin');
 

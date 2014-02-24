@@ -38,7 +38,7 @@
   }
 
 
-  window.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
     demo = document.querySelector('.demo');
 
     // Click

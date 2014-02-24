@@ -1,7 +1,7 @@
 
 /* global BackgroundCheck:false */
 
-window.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
   // Load image
   var img = document.querySelector('img');
   img.src = img.getAttribute('data-src');
