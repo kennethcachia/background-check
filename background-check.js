@@ -144,7 +144,7 @@
       el = els[e];
       list.push(el);
 
-      if (el.tagName !== 'IMG') {
+      if (el.tagName !== 'IMG' && el.tagName !== 'CANVAS') {
         url = window.getComputedStyle(el).backgroundImage;
 
         // Ignore multiple backgrounds
@@ -164,8 +164,14 @@
           list[e].img.src = url;
           log('CSS Image - ' + url);
         } else {
-          throw 'Element is not an <img> but does not have a background-image';
+          throw 'Element is not an <img> or a <canvas> but does not have a background-image';
         }
+      } else if (el.tagName === 'CANVAS') {
+        var newImg = new Image(el.width, el.height);
+        newImg.src = el.toDataURL('image/jpeg');
+        newImg.originalData = el;
+
+        list[e] = newImg;
       }
     }
 
@@ -423,7 +429,17 @@
     var parent;
 
     if (obj.nodeType) {
-      var rect = obj.getBoundingClientRect();
+      var rect;
+
+      if (obj.originalData) {
+        rect = obj.originalData.getBoundingClientRect();
+        parent = obj.originalData.parentNode;
+      } else {
+        rect = obj.getBoundingClientRect();
+        parent = obj.parentNode;
+      }
+
+      image = obj;
 
       // Clone ClientRect for modification purposes
       area = {
@@ -435,8 +451,6 @@
         height: rect.height
       };
 
-      parent = obj.parentNode;
-      image = obj;
     } else {
       area = calculateAreaFromCSS(obj);
       parent = obj.el;
