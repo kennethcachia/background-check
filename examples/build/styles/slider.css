@@ -25,7 +25,8 @@
 }
 
 .slider,
-.slider-item {
+.slider-item,
+.slider-strip {
   height: 300px;
 }
 
