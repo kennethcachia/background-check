@@ -1,0 +1,105 @@
+
+/* ==========================================================================
+   Slider
+   ========================================================================== */
+
+.slider {
+  position: relative;
+  width: 500px;
+  margin: 60px auto;
+  overflow: hidden;
+}
+
+.slider-strip {
+  -webkit-transition: left, -webkit-transform 0.3s cubic-bezier(0.694, 0.0482, 0.335, 1.000);
+  -moz-transition: left, -moz-transform 0.3s cubic-bezier(0.694, 0.0482, 0.335, 1.000);
+  -ms-transition: left, -ms-transform 0.3s cubic-bezier(0.694, 0.0482, 0.335, 1.000);
+  -o-transition: left, -o-transform 0.3s cubic-bezier(0.694, 0.0482, 0.335, 1.000);
+  transition: left, transform 0.3s cubic-bezier(0.694, 0.0482, 0.335, 1.000);
+}
+
+.slider-item {
+  background: #aaa;
+  text-align: center;
+  float: left;
+}
+
+.slider,
+.slider-item,
+.slider-strip {
+  height: 300px;
+}
+
+.slider-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 25px;
+  font-size: 0;
+}
+
+.slider-dot {
+  cursor: pointer;
+  display: inline-block;
+  width: 10px;
+  background: #fff;
+  margin: 0 5px;
+  border-radius: 999px;
+  opacity: .5;
+
+  -webkit-transition: background 0.1s ease-out;
+  -moz-transition: background 0.1s ease-out;
+  -ms-transition: background 0.1s ease-out;
+  -o-transition: background 0.1s ease-out;
+  transition: background 0.1s ease-out;
+}
+
+.slider-dot--active {
+  opacity: 1;
+}
+
+.slider-dots,
+.slider-dot {
+  height: 10px;
+}
+
+.slider-arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  margin-top: -15px;
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  line-height: 10px;
+  padding: 10px;
+  border: 2px solid #fff;
+
+  -webkit-transition: color, border-color 0.1s ease-out;
+  -moz-transition: color, border-color 0.1s ease-out;
+  -ms-transition: color, border-color 0.1s ease-out;
+  -o-transition: color, border-color 0.1s ease-out;
+  transition: color, border-color 0.1s ease-out;
+}
+
+.slider-arrow--hidden {
+  display: none;
+}
+
+.slider-arrow--left {
+  left: 25px;
+}
+
+.slider-arrow--right {
+  right: 25px;
+}
+
+.slider-arrow.background--light {
+  color: #000;
+  border-color: #000;
+}
+
+.slider-dots.background--light .slider-dot {
+  background: #000;
+}

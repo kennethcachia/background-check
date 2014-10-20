@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1000">
+
+    <title>BackgroundCheck</title>
+    <meta name="description" content="Automatically switch to a darker or a lighter version of an element depending on the brightness of images behind it.">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/examples.css" >
+    
+    <script src="scripts/background-check.min.js"></script>
+    
+    <script src="scripts/drag.js"></script>
+    <script src="scripts/main.js"></script>
+    
+    
+  </head>
+
+  <body>
+    
+
+    <div class="header">
+      
+      <h1>BackgroundCheck</h1>
+      <p class="header-subtitle">Automatically switch to a darker or a lighter version of an element depending on the brightness of images behind it.</p>
+
+      
+      <div class="header-drag">Drag and Release elements over images</div>
+
+      <div class="demo">
+        <div class="demo-images">
+          <img src="images/2.jpg" draggable="false" />
+          <img src="images/4.jpg" draggable="false" />
+          <img src="images/5.jpg" draggable="false" />
+        </div>
+
+        
+        <div class="border border--one"><div class="icon target"></div></div>
+        <div class="border border--two"><div class="icon target"></div></div>
+        <div class="border border--three"><div class="icon target"></div></div>
+        <div class="border border--four"><div class="icon icon--simple target"></div></div>
+      </div>
+
+      
+      <div class="download">
+        <a class="button" href="http://github.com/kennethcachia/Background-Check">Github Project</a>
+        <a class="button button--secondary" href="http://raw.github.com/kennethcachia/Background-Check/master/background-check.min.js">Download</a>
+      </div>
+      
+      <h2>Demos</h2>
+      <ul class="examples">
+        
+          <li><a href="index.html">Project Page</a></li>
+        
+          <li><a href="slider.html">Slider</a></li>
+        
+          <li><a href="fixed-nav.html">Fixed Nav</a></li>
+        
+          <li><a href="css-backgrounds.html">CSS Backgrounds</a></li>
+        
+          <li><a href="css-backgrounds-fullscreen.html" target="_blank">CSS Backgrounds — Fullscreen</a></li>
+        
+          <li><a href="cross-origin.html">Cross Origin</a></li>
+        
+          <li><a href="cross-origin-css.html">Cross Origin — CSS Backgrounds</a></li>
+        
+          <li><a href="flexslider.html">FlexSlider — Slide</a></li>
+        
+          <li><a href="flexslider-fade.html">FlexSlider — Fade</a></li>
+        
+      </ul>
+    </div>
+
+    <div class="content container">
+      <div class="content-row">
+        <h2>How it works</h2>
+
+        <div class="content-thirds">
+          <div class="content-third">
+            <p>If an element overlaps any of the images, either <span class="snippet">.background--dark</span> or <span class="snippet">.background--light</span> is added to it. BackgroundCheck does not change an element's style &mdash; you must do so using CSS.</p>
+
+            <a class="button" href="http://github.com/kennethcachia/Background-Check/blob/master/README.md">More Info</a>
+          </div>
+
+          <div class="content-third">
+            <div class="content-code">
+              <h3>Original Style</h3>
+              <pre>.label {<br>  color: blue;<br>}</pre>
+            </div>
+          </div>
+
+          <div class="content-third">
+            <div class="content-code">
+              <h3>Additional Styles</h3>
+              <pre>.label.background--light {<br>  color: black;<br>}<br><br>.label.background--dark {<br>  color: white;<br>}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-row">
+        <h2>How to use</h2>
+
+        <div class="content-thirds">
+          <div class="content-third">
+            <div class="content-code">
+              <pre>BackgroundCheck.init({<br>  targets: '.ui'<br>});</pre>
+              <p>Check all elements with a <strong>.ui</strong> class against all images on the page.</p>
+              <a class="button" href="http://github.com/kennethcachia/Background-Check/blob/master/README.md">More Info</a>
+            </div>
+          </div>
+
+          <div class="content-third">
+            <div class="content-code">
+              <pre>BackgroundCheck.init({<br>  targets: '.ui',<br>  images: '.thumbnail'<br>});</pre>
+              <p>Check all elements with a <strong>.ui</strong> class against all images with a <strong>.thumbnail</strong> class.</p>
+            </div>
+          </div>
+
+          <div class="content-third">
+            <div class="content-code">
+              <pre>// All targets<br>BackgroundCheck.refresh();<br><br>// Specific target<br>BackgroundCheck.refresh(e.target);</pre>
+              <p>Reprocess all or specific targets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="footer container">
+      <span class="twitter-share">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-dnt="true" data-count="none" data-text="BackgroundCheck &mdash; Automatically switch to a darker or a lighter version of an element.">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </span>
+
+      <span class="footer-credits"><a href="http://twitter.com/kennethcachia/" target="_blank">@kennethcachia</a></span>
+    </div>
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18542897-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,587 @@
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #111;
+}
+
+h1,
+h2,
+h3,
+.header-drag {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0 0 .6em 0;
+}
+
+h1:last-child,
+h2:last-child,
+h3:last-child,
+p:last-child {
+  margin-bottom: 0;
+}
+
+.container {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container--narrow {
+  max-width: 500px;
+}
+
+.snippet {
+  display: inline-block;
+  padding: 0 8px;
+  font-size: .9em;
+  background: #eee;
+}
+
+a {
+  color: #107FC9;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.button {
+  display: inline-block;
+  margin: 0;
+  padding: 9px 12px;
+  border-radius: 3px;
+  background: #107FC9;
+  color: #fff;
+  font-family: monaco, monospace;
+  font-size:10px;
+  line-height: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+}
+
+.button--secondary {
+  background: #999;
+}
+
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.header {
+  position: relative;
+  background: #f6f6f6;
+  padding: 100px 0 80px 0;
+  text-align: center;
+}
+
+.header-subtitle {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.header p {
+  max-width: 470px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-drag {
+  font-size: 15px;
+  border-left: 3px solid #ddd;
+  border-right: 3px solid #ddd;
+  padding: 10px;
+  display: inline-block;
+  margin-top: 50px;
+  background: #fff;
+
+  -webkit-shadow: 0 5px 8px rgba(0, 0, 0, 0.04);
+  -moz-box-shadow: 0 5px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+/* ==========================================================================
+   Examples
+   ========================================================================== */
+
+.examples {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   Main Demo
+   ========================================================================== */
+
+.demo {
+  position: relative;
+  padding: 110px 0 0 0;
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.demo-images {
+  overflow: hidden;
+  height: 400px;
+}
+
+.demo-images--stacked {
+  position: relative;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.demo-images--flexible {
+  height: auto;
+}
+
+.demo h2 {
+  position: absolute;
+  top: 40px;
+  left: 75px;
+  margin: 0;
+}
+
+.demo img {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 20px;
+  width: 300px;
+}
+
+.demo-images--stacked img {
+  position: absolute;
+  top: 0;
+  margin: 0;
+}
+
+.demo-images--stacked .demo-image-first {
+  left: 0;
+  z-index: auto;
+}
+
+.demo-images--stacked .demo-image-second {
+  left: 23%;
+  z-index: 5;
+}
+
+.demo-images--stacked .demo-image-third {
+  left: 66%;
+  z-index: 1;
+}
+
+.demo--single img {
+  width: auto;
+}
+
+p.demo-credits {
+  max-width: none;
+  margin-top: 10px;
+}
+
+.demo-css {
+  width: 500px;
+  height: 300px;
+  background-color: #ccc;
+  margin: 30px auto 60px auto;
+  background-image: url(../images/4.jpg);
+  background-repeat: no-repeat;
+}
+
+.demo-css--cross-origin {
+  background-size: contain;
+  background-position: center;
+  background-image: none;
+}
+
+.demo-css--fullscreen,
+.demo-css--fullscreen .slider,
+.demo-css--fullscreen .slider-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.demo-css--fullscreen .slider-item {
+  height: 100%;
+}
+
+.demo-css--fullscreen .slider-item {
+  background-size: cover;
+  background-position: center;
+}
+
+.demo-css--fullscreen .slider-item--one {
+  background-image: url(../images/9.jpg);
+}
+
+.demo-css--fullscreen .slider-item--two {
+  background-image: url(../images/8.jpg);
+}
+
+.demo-css--fullscreen .slider-item--three {
+  background-image: url(../images/7.jpg);
+}
+
+
+/* ==========================================================================
+   Download
+   ========================================================================== */
+
+.download {
+  margin: 50px 0 50px 0;
+}
+
+.download .button {
+  margin: 0 3px;
+}
+
+
+/* ==========================================================================
+   Fixed Nav
+   ========================================================================== */
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.fixed-nav {
+  position: absolute;
+  left: 50%;
+  top: 47px;
+  width: 280px;
+  margin-left: -140px;
+  text-align: center;
+}
+
+.fixed-nav.background--dark .fixed-nav-line {
+  background: #fff;
+}
+
+.fixed-nav.background--dark .fixed-nav-logo {
+  color: #fff;
+}
+
+.fixed-nav-line,
+.fixed-nav-logo {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+
+.fixed-nav-line {
+  width: 40px;
+  height: 3px;
+  background: #222;
+}
+
+.fixed-nav-logo {
+  width: 170px;
+  height: 28px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   List
+   ========================================================================== */
+
+.list {
+  padding-top: 50px;
+}
+
+.list-item {
+  text-align: center;
+  margin: 70px 0;
+}
+
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.content {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.content-row {
+  margin-bottom: 60px;
+}
+
+.content-row:after {
+  display: table;
+  content: " ";
+  clear: both;
+}
+
+.content .button {
+  margin-top: 4px;
+}
+
+.content-code h3 {
+  margin-top: -29px;
+}
+
+pre {
+  font-family: monaco, monospace;
+  font-size: 13px;
+  background: #f5f5f5;
+  padding: 18px 20px;
+  border-radius: 2px;
+}
+
+pre.code--small {
+  display: inline-block;
+  background: #ddd;
+  margin: 0;
+  padding: 5px 15px;
+}
+
+.content-thirds {
+  margin-left: -3%
+}
+
+.content-third {
+  width: 30%;
+  margin-left: 3%;
+  float: left;
+}
+
+.content-third .content-code {
+  float: none;
+  width: auto;
+  margin-right: 0;
+}
+
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+  border-top: 1px solid #eee;
+  padding: 30px 0;
+}
+
+.footer-credits {
+  float: right;
+  margin-top: -1px;
+}
+
+
+/* ==========================================================================
+   Demo
+   ========================================================================== */
+
+.border {
+  position: absolute;
+  z-index: 999;
+  padding: 18px 20px;
+  border: 1px solid #E08E79;
+  cursor: move;
+  top: 25px;
+}
+
+.border:hover {
+  border-color: #ADD8C7;
+}
+
+.border--one {
+  left: 30%;
+}
+
+.border--two {
+  left: 40%;
+  top: 28px;
+}
+
+.border--three {
+  left: 49%;
+  top: 32px;
+}
+
+.border--four {
+  left: 59%;
+  top: 32px;
+}
+
+.border--text {
+  left: 60%;
+  top: 26px;
+}
+
+.border--fixed {
+  position: fixed;
+  top: 390px;
+}
+
+.icon {
+  background: #107FC9;
+  border-radius: 999px;
+}
+
+.icon--simple {
+  border-radius: 0;
+}
+
+.border--one .icon {
+  width: 26px;
+  height: 26px;
+}
+
+.border--two .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.border--three .icon {
+  width: 10px;
+  height: 10px;
+}
+
+.border--four .icon {
+  width: 60px;
+  height: 10px;
+}
+
+.icon.background--light {
+  background: #222;
+}
+
+.icon.background--dark {
+  background: #fff;
+}
+
+.icon.background--dark.background--complex {
+  background: #ccc;
+}
+
+.icon.background--light.background--complex {
+  background: #aaa;
+}
+
+
+/* ==========================================================================
+   FlexSlider
+   ========================================================================== */
+
+.flexslider {
+  position: relative;
+  overflow: hidden;
+  margin: 60px auto 0 auto;
+  width: 500px;
+  max-height: 300px;
+}
+
+.flexslider .slides {
+  margin: 0;
+  padding: 0;
+}
+
+.flex-control-nav {
+  display: none;
+}
+
+.flex-direction-nav {
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: -12px;
+}
+
+.flex-direction-nav li {
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.flex-direction-nav li a {
+  padding: 5px 15px 8px 15px;
+  border: 2px solid #fff;
+  font-size: 20px;
+  line-height: 1em;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+
+  -webkit-transition: color, border-color 0.1s ease-out;
+  -moz-transition: color, border-color 0.1s ease-out;
+  -ms-transition: color, border-color 0.1s ease-out;
+  -o-transition: color, border-color 0.1s ease-out;
+  transition: color, border-color 0.1s ease-out;
+}
+
+.flex-direction-nav li a.background--light {
+  color: #222;
+  border-color: #222;
+}
+
+.flex-direction-nav li:first-child {
+  left: 10px;
+}
+
+.flex-direction-nav li:last-child {
+  right: 10px;
+}
