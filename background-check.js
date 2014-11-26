@@ -19,6 +19,8 @@
   'use strict';
 
   var resizeEvent = window.orientation !== undefined ? 'orientationchange' : 'resize';
+  var resizeFn;
+  var scrollFn;
   var supported;
   var canvas;
   var context;
@@ -70,12 +72,14 @@
         canvas.style.width = '100%';
         canvas.style.height = '100%';
 
-        window.addEventListener(resizeEvent, throttle.bind(null, function () {
+        resizeFn = throttle.bind(null, function () {
           resizeCanvas();
           check();
-        }));
+        });
+        window.addEventListener(resizeEvent, resizeFn);
 
-        window.addEventListener('scroll', throttle.bind(null, check));
+        scrollFn = throttle.bind(null, check);
+        window.addEventListener('scroll', scrollFn);
 
         resizeCanvas();
         check();
@@ -88,6 +92,13 @@
    * Destructor
    */
   function destroy() {
+    if (supported) {
+      window.removeEventListener(resizeEvent, resizeFn);
+      window.removeEventListener('scroll', scrollFn);
+      resizeFn = null;
+      scrollFn = null;
+    }
+
     supported = null;
     canvas = null;
     context = null;
@@ -241,7 +252,7 @@
    */
   function kill(start) {
     var duration = new Date().getTime() - start;
-    
+
     log('Duration: ' + duration + 'ms');
 
     if (duration > get('maxDuration')) {
@@ -540,7 +551,7 @@
     for (var t = 0; t < targets.length; t++) {
       target = targets[t];
       target = get('changeParent') ? target.parentNode : target;
-      
+
       classList(target, get('classes').light, 'remove');
       classList(target, get('classes').dark, 'remove');
       classList(target, get('classes').complex, 'remove');
@@ -549,7 +560,7 @@
 
 
   /*
-   * Calculate average pixel brightness of a region 
+   * Calculate average pixel brightness of a region
    * and add 'light' or 'dark' accordingly
    */
   function calculatePixelBrightness(target) {
