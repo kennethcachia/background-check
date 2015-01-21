@@ -1,0 +1,21 @@
+{
+  "name": "background-check",
+  "version": "1.2.2",
+  "homepage": "http://www.kennethcachia.com/background-check/",
+  "authors": [
+    "Kenneth Cachia"
+  ],
+  "description": "Automatically switch to a darker or a lighter version of an element depending on the brightness of images behind it.",
+  "main": "background-check.js",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}
