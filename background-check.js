@@ -73,9 +73,9 @@
         window.addEventListener(resizeEvent, throttle.bind(null, function () {
           resizeCanvas();
           check();
-        }));
+        }), false);
 
-        window.addEventListener('scroll', throttle.bind(null, check));
+        window.addEventListener('scroll', throttle.bind(null, check), false);
 
         resizeCanvas();
         check();
@@ -145,7 +145,7 @@
       list.push(el);
 
       if (el.tagName !== 'IMG') {
-        url = window.getComputedStyle(el).backgroundImage;
+        url = window.getComputedStyle(el,null).backgroundImage;
 
         // Ignore multiple backgrounds
         if (url.split(/,url|, url/).length > 1) {
@@ -299,7 +299,7 @@
    * using the object's CSS
    */
   function calculateAreaFromCSS(obj) {
-    var css = window.getComputedStyle(obj.el);
+    var css = window.getComputedStyle(obj.el,null);
 
     // Force no-repeat and padding-box
     obj.el.style.backgroundRepeat = 'no-repeat';
@@ -568,30 +568,34 @@
       removeClasses(target);
 
       target = get('changeParent') ? target.parentNode : target;
-      data = context.getImageData(dims.left, dims.top, dims.width, dims.height).data;
+      try {
+        data = context.getImageData(dims.left, dims.top, dims.width, dims.height).data;
 
-      for (var p = 0; p < data.length; p += 4) {
+        for (var p = 0; p < data.length; p += 4) {
 
-        if (data[p] === mask.r && data[p + 1] === mask.g && data[p + 2] === mask.b) {
-          minOverlap++;
-        } else {
-          pixels++;
-          brightness = (0.2126 * data[p]) + (0.7152 * data[p + 1]) + (0.0722 * data[p + 2]);
-          delta = brightness - mean;
-          deltaSqr += delta * delta;
-          mean = mean + delta / pixels;
+          if (data[p] === mask.r && data[p + 1] === mask.g && data[p + 2] === mask.b) {
+            minOverlap++;
+          } else {
+            pixels++;
+            brightness = (0.2126 * data[p]) + (0.7152 * data[p + 1]) + (0.0722 * data[p + 2]);
+            delta = brightness - mean;
+            deltaSqr += delta * delta;
+            mean = mean + delta / pixels;
+          }
         }
-      }
 
-      if (minOverlap <= (data.length / 4) * (1 - (get('minOverlap') / 100))) {
-        variance = Math.sqrt(deltaSqr / pixels) / 255;
-        mean = mean / 255;
-        log('Target: ' + target.className +  ' lum: ' + mean + ' var: ' + variance);
-        classList(target, mean <= (get('threshold') / 100) ? get('classes').dark : get('classes').light, 'add');
+        if (minOverlap <= (data.length / 4) * (1 - (get('minOverlap') / 100))) {
+          variance = Math.sqrt(deltaSqr / pixels) / 255;
+          mean = mean / 255;
+          log('Target: ' + target.className +  ' lum: ' + mean + ' var: ' + variance);
+          classList(target, mean <= (get('threshold') / 100) ? get('classes').dark : get('classes').light, 'add');
 
-        if (variance > get('minComplexity') / 100) {
-          classList(target, get('classes').complex, 'add');
+          if (variance > get('minComplexity') / 100) {
+            classList(target, get('classes').complex, 'add');
+          }
         }
+      } catch (e) {
+        // probably old browser.. ff 3.5.5
       }
     }
   }
@@ -651,8 +655,8 @@
     var calculate = function (el) {
       var zindex = 0;
 
-      if (window.getComputedStyle(el).position !== 'static') {
-        zindex = parseInt(window.getComputedStyle(el).zIndex, 10) || 0;
+      if (window.getComputedStyle(el, null).position !== 'static') {
+        zindex = parseInt(window.getComputedStyle(el, null).zIndex, 10) || 0;
 
         // Reserve zindex = 0 for elements with position: static;
         if (zindex >= 0) {
@@ -750,10 +754,10 @@
 
             if (sorted) {
               // Sorted -- redraw all images
-              imageNode.addEventListener('load', check.bind(null, null, false, null));
+              imageNode.addEventListener('load', check.bind(null, null, false, null), false);
             } else {
               // Not sorted -- just draw one image
-              imageNode.addEventListener('load', check.bind(null, target, true, image));
+              imageNode.addEventListener('load', check.bind(null, target, true, image), false);
             }
           } else {
             log('Drawing: ' + image.src);
