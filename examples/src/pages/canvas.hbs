@@ -1,0 +1,21 @@
+---
+scripts: ["drag", "canvas"]
+---
+
+    <div class="header">
+      {{> header}}
+      {{> drag}}
+
+      <div class="demo">
+        <canvas id="demo-canvas" width="300" height="300"></canvas>
+
+        {{> targets-fixed}}
+      </div>
+
+      {{> download}}
+      {{> nav}}
+    </div>
+
+    {{> footer}}
+    {{> ga}}
+
