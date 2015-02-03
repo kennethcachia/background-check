@@ -37,16 +37,17 @@
     }
 
     // Default values
-    attrs.debug         = checkAttr(a.debug, false);
-    attrs.debugOverlay  = checkAttr(a.debugOverlay, false);
-    attrs.targets       = getElements(a.targets);
-    attrs.images        = getElements(a.images || 'img', true);
-    attrs.changeParent  = checkAttr(a.changeParent, false);
-    attrs.threshold     = checkAttr(a.threshold, 50);
-    attrs.minComplexity = checkAttr(a.minComplexity, 30);
-    attrs.minOverlap    = checkAttr(a.minOverlap, 50);
-    attrs.windowEvents  = checkAttr(a.windowEvents, true);
-    attrs.maxDuration   = checkAttr(a.maxDuration, 500);
+    attrs.debug               = checkAttr(a.debug, false);
+    attrs.debugOverlay        = checkAttr(a.debugOverlay, false);
+    attrs.targets             = getElements(a.targets);
+    attrs.images              = getElements(a.images || 'img', true);
+    attrs.changeParent        = checkAttr(a.changeParent, false);
+    attrs.threshold           = checkAttr(a.threshold, 50);
+    attrs.minComplexity       = checkAttr(a.minComplexity, 30);
+    attrs.minOverlap          = checkAttr(a.minOverlap, 50);
+    attrs.windowEvents        = checkAttr(a.windowEvents, true);
+    attrs.maxDuration         = checkAttr(a.maxDuration, 500);
+    attrs.scrollableElement   = checkAttr(a.scrollableElement, window);
 
     attrs.mask = checkAttr(a.mask, {
       r: 0,
@@ -75,7 +76,7 @@
           check();
         }));
 
-        window.addEventListener('scroll', throttle.bind(null, check));
+        attrs.scrollableElement.addEventListener('scroll', throttle.bind(null, check));
 
         resizeCanvas();
         check();
