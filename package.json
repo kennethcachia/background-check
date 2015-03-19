@@ -1,11 +1,12 @@
 {
   "name": "background-check",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "author": {
     "name" : "Kenneth Cachia",
     "url" : "http://kennethcachia.com/"
   },
-  "main": "./src",
+  "main": "background-check.js",
+  "repo": "https://github.com/kennethcachia/background-check.git",
   "homepage": "http://kennethcachia.com/background-check",
   "devDependencies": {
     "grunt": "~0.4.1",
