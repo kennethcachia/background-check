@@ -6,7 +6,7 @@
     "Kenneth Cachia"
   ],
   "description": "Automatically switch to a darker or a lighter version of an element depending on the brightness of images behind it.",
-  "main": "background-check.js",
+  "main": "build/background-check.js",
   "moduleType": [
     "amd",
     "globals"
