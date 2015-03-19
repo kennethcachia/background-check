@@ -84,7 +84,7 @@ module.exports = function (grunt) {
 
     copy: {
       min: {
-        src: 'dist/background-check.min.js',
+        src: 'build/background-check.min.js',
         dest: 'examples/build/scripts/background-check.min.js'
       }
     }
