@@ -5,6 +5,7 @@
     "name" : "Kenneth Cachia",
     "url" : "http://kennethcachia.com/"
   },
+  "main": "./src",
   "homepage": "http://kennethcachia.com/background-check",
   "devDependencies": {
     "grunt": "~0.4.1",
