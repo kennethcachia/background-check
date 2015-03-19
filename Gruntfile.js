@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 
     watch: {
       source: {
-        files: ['background-check.js'],
+        files: ['src/background-check.js'],
         tasks: ['clean:source', 'jshint', 'uglify', 'copy']
       },
 
@@ -38,7 +38,11 @@ module.exports = function (grunt) {
     },
 
     jshint: {
-      files: ['background-check.js', 'examples/build/scripts/*.js', '!examples/build/scripts/*.min.js'],
+      files: [
+      	'src/background-check.js',
+      	'examples/build/scripts/*.js',
+      	'!examples/build/scripts/*.min.js'
+      ],
       options: {
         'white': true,
         'indent': 2,
@@ -61,7 +65,10 @@ module.exports = function (grunt) {
     },
 
     clean: {
-      source: ['background-check.min.js', 'examples/build/scripts/background-check.min.js'],
+      source: [
+      	'build/background-check.min.js',
+      	'examples/build/scripts/background-check.min.js'
+      ],
       examples: ['examples/build/*.html']
     },
 
@@ -70,14 +77,14 @@ module.exports = function (grunt) {
         banner: '/* BackgroundCheck\n   <%= pkg.homepage %>\n   v<%=pkg.version %> */\n\n'
       },
       build: {
-        src: 'background-check.js',
-        dest: 'background-check.min.js'
+        src: 'src/background-check.js',
+        dest: 'build/background-check.min.js'
       }
     },
 
     copy: {
       min: {
-        src: 'background-check.min.js',
+        src: 'dist/background-check.min.js',
         dest: 'examples/build/scripts/background-check.min.js'
       }
     }
