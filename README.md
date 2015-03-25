@@ -127,6 +127,7 @@ Used with `.init()`, `.set()` or `.get()`
 + **classes**: Classes added to targets. *Default:* `{ dark: 'background--dark', light: 'background--light', complex: 'background--complex' }`
 + **windowEvents**: Reprocess on window resize and scroll. *Default:* true.
 + **maxDuration**: Maximum processing time allowed. Killed if it takes longer. *Default:* 500 (ms).
++ **callback**: Callback function to be called after classes have been added to an element. *Example:* `function(elem, result, complex) {}`
 + **mask**: Used internally when checking if an element overlaps any of the images. *Default:* `{ r: 0, g: 255, b: 0 }`
 + **debug**: Enable or disable logs. *Default*: false.
 

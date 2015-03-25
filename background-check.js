@@ -47,6 +47,7 @@
     attrs.minOverlap    = checkAttr(a.minOverlap, 50);
     attrs.windowEvents  = checkAttr(a.windowEvents, true);
     attrs.maxDuration   = checkAttr(a.maxDuration, 500);
+    attrs.callback      = checkAttr(a.callback, function () {});
 
     attrs.mask = checkAttr(a.mask, {
       r: 0,
@@ -241,7 +242,7 @@
    */
   function kill(start) {
     var duration = new Date().getTime() - start;
-    
+
     log('Duration: ' + duration + 'ms');
 
     if (duration > get('maxDuration')) {
@@ -540,7 +541,7 @@
     for (var t = 0; t < targets.length; t++) {
       target = targets[t];
       target = get('changeParent') ? target.parentNode : target;
-      
+
       classList(target, get('classes').light, 'remove');
       classList(target, get('classes').dark, 'remove');
       classList(target, get('classes').complex, 'remove');
@@ -549,7 +550,7 @@
 
 
   /*
-   * Calculate average pixel brightness of a region 
+   * Calculate average pixel brightness of a region
    * and add 'light' or 'dark' accordingly
    */
   function calculatePixelBrightness(target) {
@@ -563,6 +564,7 @@
     var variance;
     var minOverlap = 0;
     var mask = get('mask');
+    var isComplex = false;
 
     if (dims.width > 0 && dims.height > 0) {
       removeClasses(target);
@@ -586,12 +588,17 @@
       if (minOverlap <= (data.length / 4) * (1 - (get('minOverlap') / 100))) {
         variance = Math.sqrt(deltaSqr / pixels) / 255;
         mean = mean / 255;
+
+        var result = mean <= (get('threshold') / 100) ? 'dark' : 'light';
         log('Target: ' + target.className +  ' lum: ' + mean + ' var: ' + variance);
-        classList(target, mean <= (get('threshold') / 100) ? get('classes').dark : get('classes').light, 'add');
+        classList(target, get('classes')[result], 'add');
 
         if (variance > get('minComplexity') / 100) {
+          isComplex = true;
           classList(target, get('classes').complex, 'add');
         }
+
+        attrs.callback(target, result, isComplex);
       }
     }
   }
