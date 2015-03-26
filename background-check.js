@@ -161,6 +161,9 @@
           url = url.slice(4, -1);
           url = url.replace(/"/g, '');
 
+          // Fix for "tainted canvas" https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
+          list[e].img.crossOrigin = 'Anonymous';
+
           list[e].img.src = url;
           log('CSS Image - ' + url);
         } else {
