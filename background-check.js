@@ -501,9 +501,13 @@
     var area = getArea(image);
 
     image = image.nodeType ? image : image.img;
+    
+    var imageCopy = new Image();
+    imageCopy.crossOrigin = 'Anonymous';
+    imageCopy.src = image.src;    
 
     if (area.imageWidth > 0 && area.imageHeight > 0 && area.width > 0 && area.height > 0) {
-      context.drawImage(image,
+      context.drawImage(imageCopy,
                         area.imageLeft, area.imageTop, area.imageWidth, area.imageHeight,
                         area.left, area.top, area.width, area.height);
     } else {
