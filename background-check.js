@@ -161,6 +161,9 @@
           url = url.slice(4, -1);
           url = url.replace(/"/g, '');
 
+          // Fix for "tainted canvas" https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
+          list[e].img.crossOrigin = 'Anonymous';
+
           list[e].img.src = url;
           log('CSS Image - ' + url);
         } else {
@@ -498,9 +501,13 @@
     var area = getArea(image);
 
     image = image.nodeType ? image : image.img;
+    
+    var imageCopy = new Image();
+    imageCopy.crossOrigin = 'Anonymous';
+    imageCopy.src = image.src;    
 
     if (area.imageWidth > 0 && area.imageHeight > 0 && area.width > 0 && area.height > 0) {
-      context.drawImage(image,
+      context.drawImage(imageCopy,
                         area.imageLeft, area.imageTop, area.imageWidth, area.imageHeight,
                         area.left, area.top, area.width, area.height);
     } else {
