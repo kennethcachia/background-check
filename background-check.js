@@ -92,16 +92,17 @@
    * Destructor
    */
   function destroy() {
+    removeClasses();
     if (supported) {
       window.removeEventListener(resizeEvent, resizeFn);
       window.removeEventListener('scroll', scrollFn);
-      resizeFn = null;
-      scrollFn = null;
+      resizeFn = undefined;
+      scrollFn = undefined;
     }
 
-    supported = null;
-    canvas = null;
-    context = null;
+    supported = undefined;
+    canvas = undefined;
+    context = undefined;
     attrs = {};
 
     if (throttleDelay) {
