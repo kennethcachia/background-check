@@ -625,9 +625,12 @@
     for (var t = 0; t < total; t++) {
       target = get('targets')[t];
 
+      if (mode === 'targets' && (!checkTarget || checkTarget === target)) {
+        found = true;
+      }
+
       if (isInside(target, viewport)) {
         if (mode === 'targets' && (!checkTarget || checkTarget === target)) {
-          found = true;
           calculatePixelBrightness(target);
         } else if (mode === 'image' && isInside(target, checkTarget)) {
           calculatePixelBrightness(target);
