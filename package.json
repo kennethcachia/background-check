@@ -5,6 +5,10 @@
     "name" : "Kenneth Cachia",
     "url" : "http://kennethcachia.com/"
   },
+  "main": "background-check.js",
+  "browser": {
+    "index.js": "./background-check.min.js"
+  },
   "homepage": "http://kennethcachia.com/background-check",
   "devDependencies": {
     "grunt": "~0.4.1",
