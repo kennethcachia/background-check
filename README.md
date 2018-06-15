@@ -1,4 +1,4 @@
-#BackgroundCheck
+# BackgroundCheck
 
 Automatically switch to a darker or a lighter version of an element depending on the brightness of images behind it.
 
@@ -17,7 +17,7 @@ Automatically switch to a darker or a lighter version of an element depending on
 + [FlexSlider &mdash; Slide](http://www.kennethcachia.com/background-check/flexslider.html)
 + [FlexSlider &mdash; Fade](http://www.kennethcachia.com/background-check/flexslider-fade.html)
 
-##How it works
+## How it works
 
 If an element overlaps any of the images, either `.background--dark` or `.background--light` is added to it. BackgroundCheck does not change an element's style &mdash; you must do so using CSS.
 
@@ -39,7 +39,7 @@ p.background--light {
 
 Classes are only added if the element overlaps an image. An element is considered to overlap an image if at least 50% (configurable) of it's area is covering that image.
 
-###Complex backgrounds
+### Complex backgrounds
 
 The light and dark classes work well with simple backgrounds, but you might require an additional level of control for elaborate backgrounds. BackgroundCheck adds `.background--complex` to an element if its background exceeds a certain level of complexity.
 
@@ -71,7 +71,7 @@ p.background--light.background--complex {
 }
 ```
 
-##How to use
+## How to use
 
 **Initialize**
 
@@ -114,7 +114,7 @@ BackgroundCheck.set('targets', '.header');
 BackgroundCheck.destroy();
 ```
 
-##Attributes
+## Attributes
 
 Used with `.init()`, `.set()` or `.get()`
 
@@ -130,7 +130,7 @@ Used with `.init()`, `.set()` or `.get()`
 + **mask**: Used internally when checking if an element overlaps any of the images. *Default:* `{ r: 0, g: 255, b: 0 }`
 + **debug**: Enable or disable logs. *Default*: false.
 
-##CSS Backgrounds
+## CSS Backgrounds
 
 BackgroundCheck can also be used on an element that has a `background-image`. For example:
 
@@ -161,6 +161,6 @@ Tested with the following units:
 + Multiple backgrounds are not supported
 + Four-value syntax can be used if the browser [supports it](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position#Specifications)
 
-##Browser Support
+## Browser Support
 
 Tested on IE 9-11, iOS 6/7 and the latest versions of Chrome, Firefox and Safari.
