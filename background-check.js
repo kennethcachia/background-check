@@ -554,6 +554,10 @@
    */
   function calculatePixelBrightness(target) {
     var dims = target.getBoundingClientRect();
+    var left = dims.left;
+    var top = dims.top;
+    var width = dims.width;
+    var height = dims.height;
     var brightness;
     var data;
     var pixels = 0;
@@ -564,11 +568,27 @@
     var minOverlap = 0;
     var mask = get('mask');
 
-    if (dims.width > 0 && dims.height > 0) {
+    // Ignore pixels outside the viewport.
+    if (left < viewport.left) {
+      width = width - (viewport.left - left);
+      left = viewport.left;
+    }
+    if (left + width > viewport.right) {
+      width = viewport.right - left;
+    }
+    if (top < viewport.top) {
+      height = height - (viewport.top - top);
+      top = viewport.top;
+    }
+    if (top + height > viewport.bottom) {
+      height = viewport.bottom - top;
+    }
+
+    if (width > 0 && height > 0) {
       removeClasses(target);
 
       target = get('changeParent') ? target.parentNode : target;
-      data = context.getImageData(dims.left, dims.top, dims.width, dims.height).data;
+      data = context.getImageData(left, top, width, height).data;
 
       for (var p = 0; p < data.length; p += 4) {
 
